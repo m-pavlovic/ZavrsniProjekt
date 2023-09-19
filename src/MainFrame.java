@@ -1,10 +1,7 @@
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 
 public class MainFrame extends JFrame {
 
@@ -16,7 +13,7 @@ public class MainFrame extends JFrame {
 
     public MainFrame() {
         super("Price Calculator");
-        setSize(800, 500);
+        setSize(800, 700);
         setVisible(true);
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -46,12 +43,12 @@ public class MainFrame extends JFrame {
         bottomPanel.setBottomPanelListener(new BottomPanelListener() {
             @Override
             public void bottomPanelEventOccurred(BottomPanelEvent bpe) {
-                String name = bpe.getName();
-                String surname = bpe.getSurname();
-                String paymentIn = bpe.getPaymentIn();
-                viewPanel.setTextOnTextArea(name);
-                viewPanel.setTextOnTextArea(surname);
-                viewPanel.setTextOnTextArea(paymentIn);
+                viewPanel.setTextOnTextArea(bpe.getName());
+                viewPanel.setTextOnTextArea(bpe.getSurname());
+                viewPanel.setTextOnTextArea(bpe.getPaymentIn());
+                viewPanel.setTextOnTextArea(bpe.getShipName());
+                viewPanel.setTextOnTextArea(bpe.getShipType());
+                viewPanel.setTextOnTextArea(String.valueOf(bpe.getShipLenght()));
             }
         });
 
@@ -61,6 +58,7 @@ public class MainFrame extends JFrame {
             @Override
             public void clearButtonEventOccurred(ToolBarEvent tbe) {
                 viewPanel.clearAll();
+                bottomPanel.resetForm();
             }
 
             @Override

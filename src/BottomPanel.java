@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 
 public class BottomPanel extends JPanel {
 
-    private JButton calculateButton;
+    private JButton confirmButton;
     private JTextField nameField;
     private JLabel nameLabel;
     private JTextField surnameField;
@@ -17,11 +17,15 @@ public class BottomPanel extends JPanel {
     private JComboBox<String> typeOfShipBox;
     private JLabel shipLength;
     private JSlider shipLengthSlider;
+    private JLabel sliderLabel;
     private JLabel typeOfPayment;
     private JRadioButton radioCash;
     private JRadioButton radioCard;
     private ButtonGroup paymentGroup;
     private BottomPanelListener bottomPanelListener;
+    private ImageIcon icon;
+    private JLabel iconLabel;
+    private JButton nextButton;
 
     public BottomPanel() {
         initPanelComps();
@@ -33,7 +37,7 @@ public class BottomPanel extends JPanel {
         Dimension dims = getPreferredSize();
         dims.height = 300;
         setPreferredSize(dims);
-        calculateButton = new JButton("Calculate");
+        confirmButton = new JButton("Confirm");
         nameLabel = new JLabel("Name:");
         nameField = new JTextField(15);
         surnameLabel = new JLabel("Surname:");
@@ -43,6 +47,8 @@ public class BottomPanel extends JPanel {
         typeOfShip = new JLabel("Type of ship:");
         typeOfShipBox = new JComboBox<>(shipTypes);
         shipLength = new JLabel("Length of ship:");
+        shipLengthSlider = new JSlider(5, 65, 5);
+        sliderLabel = new JLabel();
         typeOfPayment = new JLabel("Type of payment:");
         radioCash = new JRadioButton("Cash");
         radioCash.setActionCommand("Cash");
@@ -51,11 +57,14 @@ public class BottomPanel extends JPanel {
         paymentGroup = new ButtonGroup();
         paymentGroup.add(radioCash);
         paymentGroup.add(radioCard);
+        icon = new ImageIcon("anchor.jpg");
+        iconLabel = new JLabel(icon);
+        nextButton = new JButton("Next");
     }
 
     private void layoutComps() {
         setLayout(null);
-        calculateButton.setBounds(620, 90, 120, 40);
+        confirmButton.setBounds(620, 150, 120, 40);
         nameLabel.setBounds(20, 30, 120, 20);
         nameField.setBounds(150, 30, 120, 20);
         surnameLabel.setBounds(20, 80, 120, 20);
@@ -68,11 +77,26 @@ public class BottomPanel extends JPanel {
         typeOfShip.setBounds(20, 180, 120, 20);
         shipLength.setBounds(20, 230, 120, 20);
         typeOfShipBox.setBounds(150,180, 120, 20);
+        shipLengthSlider.setPreferredSize(new Dimension(200, 50));
+        shipLengthSlider.setBounds(150, 230, 200, 50);
+        shipLengthSlider.setMajorTickSpacing(10);
+        shipLengthSlider.setMinorTickSpacing(5);
+        shipLengthSlider.setPaintTicks(true);
+        shipLengthSlider.setPaintTrack(true);
+        shipLengthSlider.setPaintLabels(true);
+        sliderLabel.setBounds(410, 230, 120, 20);
+        sliderLabel.setFont(new Font("Serif", Font.BOLD, 15));
+        shipLengthSlider.addChangeListener(e -> sliderLabel.setText("Length: " + shipLengthSlider.getValue()));
+        icon.setImage(icon.getImage().getScaledInstance(70, 70, Image.SCALE_DEFAULT));
+        iconLabel.setIcon(icon);
+        iconLabel.setBounds(650, 50, 70, 70);
+        nextButton.setBounds(620, 200, 120, 40);
+        add(iconLabel);
         add(nameOfShip);
         add(nameOfShipField);
         add(typeOfShip);
         add(shipLength);
-        add(calculateButton);
+        add(confirmButton);
         add(nameLabel);
         add(nameField);
         add(surnameLabel);
@@ -81,20 +105,33 @@ public class BottomPanel extends JPanel {
         add(radioCash);
         add(radioCard);
         add(typeOfShipBox);
+        add(shipLengthSlider);
+        add(sliderLabel);
+        add(nextButton);
+
 
     }
 
     public void activateComps() {
         if (bottomPanelListener != null) {
-            calculateButton.addActionListener(new ActionListener() {
+            confirmButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     String name = nameField.getText();
                     String surname = surnameField.getText();
                     String payment = paymentGroup.getSelection().getActionCommand();
-                    BottomPanelEvent bpe = new BottomPanelEvent(this, name, surname, payment);
+                    String shipName = nameOfShipField.getText();
+                    String shipType = (String) typeOfShipBox.getSelectedItem();
+                    int shipLength = shipLengthSlider.getValue();
+                    BottomPanelEvent bpe = new BottomPanelEvent(this, name, surname, payment, shipName, shipType, shipLength);
                     bottomPanelListener.bottomPanelEventOccurred(bpe);
                     resetForm();
+                }
+            });
+            nextButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    calculatorForm();
                 }
             });
         }
@@ -104,9 +141,16 @@ public class BottomPanel extends JPanel {
         this.bottomPanelListener = bottomPanelListener;
     }
 
-    private void resetForm() {
+    public void resetForm() {
         nameField.setText(null);
         surnameField.setText(null);
         paymentGroup.clearSelection();
+        nameOfShipField.setText(null);
+        typeOfShipBox.setSelectedIndex(0);
+        shipLengthSlider.setValue(5);
+    }
+
+    private void calculatorForm() {
+        CalculatorFrame calculatorFrame = new CalculatorFrame();
     }
 }

@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 public class ToolBarPanel extends JPanel {
 
     private JButton clearButton;
-    private JButton save;
+    private JButton saveButton;
     private ToolBarListener toolBarListener;
 
 
@@ -20,15 +20,17 @@ public class ToolBarPanel extends JPanel {
 
     private void initPanelComps() {
         clearButton = new JButton("Clear All!");
-        save = new JButton("Save");
+        saveButton = new JButton("Save");
     }
 
 
     private void layoutComps() {
-        save.setPreferredSize(new Dimension(100, 40));
+        saveButton.setPreferredSize(new Dimension(100, 40));
         clearButton.setPreferredSize(new Dimension(100, 40));
+        clearButton.setFocusable(false);
+        saveButton.setFocusable(false);
         add(clearButton);
-        add(save);
+        add(saveButton);
     }
 
     public void setToolBarListener(ToolBarListener toolBarListener) {
@@ -44,7 +46,7 @@ public class ToolBarPanel extends JPanel {
                     toolBarListener.clearButtonEventOccurred(tbe);
                 }
             });
-            save.addActionListener(new ActionListener() {
+            saveButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     ToolBarEvent tbe = new ToolBarEvent(this);
