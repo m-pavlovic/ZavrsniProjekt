@@ -15,8 +15,8 @@ public class MainFrame extends JFrame {
 
 
     public MainFrame() {
-        super("Simple GUI App");
-        setSize(670, 400);
+        super("Price Calculator");
+        setSize(800, 500);
         setVisible(true);
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -48,10 +48,10 @@ public class MainFrame extends JFrame {
             public void bottomPanelEventOccurred(BottomPanelEvent bpe) {
                 String name = bpe.getName();
                 String surname = bpe.getSurname();
-                String programmingIn = bpe.getProgrammingIn();
+                String paymentIn = bpe.getPaymentIn();
                 viewPanel.setTextOnTextArea(name);
                 viewPanel.setTextOnTextArea(surname);
-                viewPanel.setTextOnTextArea(programmingIn);
+                viewPanel.setTextOnTextArea(paymentIn);
             }
         });
 
@@ -64,20 +64,11 @@ public class MainFrame extends JFrame {
             }
 
             @Override
-            public void registerEventOccurred(ToolBarEvent tbe) {
-                int value = fileChooser.showOpenDialog(MainFrame.this);
-                if (value == JFileChooser.APPROVE_OPTION) {
+            public void saveEventOccurred(ToolBarEvent tbe) {
+                int value = fileChooser.showSaveDialog(MainFrame.this);
+                if (JFileChooser.APPROVE_OPTION == value) {
                     File file = fileChooser.getSelectedFile();
-                    try(BufferedReader br = new BufferedReader(new java.io.FileReader(file))) {
-                        String line;
-                        while ((line = br.readLine()) != null) {
-                            viewPanel.setTextOnTextArea(line + "\n");
-                        }
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                    viewPanel.saveToFile(file);
                 }
             }
         });

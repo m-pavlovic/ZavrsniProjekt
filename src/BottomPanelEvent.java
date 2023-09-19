@@ -10,12 +10,12 @@ public class BottomPanelEvent extends EventObject {
 
     private String name;
     private String surname;
-    private String programmingIn;
-    public BottomPanelEvent(Object source, String name, String surname, String programmingIn) {
+    private String paymentIn;
+    public BottomPanelEvent(Object source, String name, String surname, String paymentIn) {
         super(source);
         this.name = name;
         this.surname = surname;
-        this.programmingIn = programmingIn;
+        this.paymentIn = paymentIn;
     }
 
     public String getName() {
@@ -26,7 +26,7 @@ public class BottomPanelEvent extends EventObject {
         return surname;
     }
 
-    public String getProgrammingIn() {
-        return programmingIn;
+    public String getPaymentIn() {
+        return paymentIn;
     }
 }

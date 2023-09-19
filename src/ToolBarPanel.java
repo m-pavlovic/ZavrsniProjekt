@@ -1,11 +1,12 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ToolBarPanel extends JPanel {
 
     private JButton clearButton;
-    private JButton register;
+    private JButton save;
     private ToolBarListener toolBarListener;
 
 
@@ -19,13 +20,15 @@ public class ToolBarPanel extends JPanel {
 
     private void initPanelComps() {
         clearButton = new JButton("Clear All!");
-        register = new JButton("Register");
+        save = new JButton("Save");
     }
 
 
     private void layoutComps() {
+        save.setPreferredSize(new Dimension(100, 40));
+        clearButton.setPreferredSize(new Dimension(100, 40));
         add(clearButton);
-        add(register);
+        add(save);
     }
 
     public void setToolBarListener(ToolBarListener toolBarListener) {
@@ -41,11 +44,11 @@ public class ToolBarPanel extends JPanel {
                     toolBarListener.clearButtonEventOccurred(tbe);
                 }
             });
-            register.addActionListener(new ActionListener() {
+            save.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     ToolBarEvent tbe = new ToolBarEvent(this);
-                    toolBarListener.registerEventOccurred(tbe);
+                    toolBarListener.saveEventOccurred(tbe);
                 }
             });
         }

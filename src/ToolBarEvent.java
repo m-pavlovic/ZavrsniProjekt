@@ -9,11 +9,11 @@ public class ToolBarEvent extends EventObject {
      */
 
     private boolean clearButtonClicked;
-    private boolean readFileButtonClicked;
+    private boolean saveFileButtonClicked;
     public ToolBarEvent(Object source) {
         super(source);
         this.clearButtonClicked = false;
-        this.readFileButtonClicked = false;
+        this.saveFileButtonClicked = false;
     }
 
     public boolean isClearButtonClicked() {
@@ -24,11 +24,11 @@ public class ToolBarEvent extends EventObject {
         this.clearButtonClicked = clearButtonClicked;
     }
 
-    public boolean isReadFileButtonClicked() {
-        return readFileButtonClicked;
+    public boolean isSaveFileButtonClicked() {
+        return saveFileButtonClicked;
     }
 
-    public void setReadFileButtonClicked(boolean readFileButtonClicked) {
-        this.readFileButtonClicked = readFileButtonClicked;
+    public void setSaveFileButtonClicked(boolean saveFileButtonClicked) {
+        this.saveFileButtonClicked = saveFileButtonClicked;
     }
 }
