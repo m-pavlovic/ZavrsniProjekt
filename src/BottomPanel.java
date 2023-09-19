@@ -126,12 +126,15 @@ public class BottomPanel extends JPanel {
                     BottomPanelEvent bpe = new BottomPanelEvent(this, name, surname, payment, shipName, shipType, shipLength);
                     bottomPanelListener.bottomPanelEventOccurred(bpe);
                     resetForm();
+                    ToolBarPanel.clearButton.setEnabled(true);
+                    ToolBarPanel.saveButton.setEnabled(true);
                 }
             });
             nextButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    calculatorForm();
+                    new Offer();
+                    nextButton.setEnabled(false);
                 }
             });
         }
@@ -148,9 +151,5 @@ public class BottomPanel extends JPanel {
         nameOfShipField.setText(null);
         typeOfShipBox.setSelectedIndex(0);
         shipLengthSlider.setValue(5);
-    }
-
-    private void calculatorForm() {
-        CalculatorFrame calculatorFrame = new CalculatorFrame();
     }
 }
