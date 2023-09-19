@@ -2,22 +2,25 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
 
-public class Offer extends JFrame implements ActionListener {
+public class Offer extends JFrame {
 
     JLabel offerLabel;
-    JCheckBoxMenuItem washing;
-    JCheckBoxMenuItem welding;
-    JCheckBoxMenuItem painting;
-    JCheckBoxMenuItem sandBlasting;
-    JCheckBoxMenuItem overhaulingAndRepairOfStableEngines;
-    JCheckBoxMenuItem repairOfElectricalEquipment;
+    static JCheckBoxMenuItem washing;
+    static JCheckBoxMenuItem welding;
+    static JCheckBoxMenuItem painting;
+    static JCheckBoxMenuItem sandBlasting;
+    static JCheckBoxMenuItem overhaulingAndRepairOfStableEngines;
+    static JCheckBoxMenuItem repairOfElectricalEquipment;
     JLabel checkBoxLabel;
     JLabel startingDateLabel;
     JLabel endingDateLabel;
     JTextField startingDateTextField;
     JTextField endingDateTextField;
     JButton calculateButton;
+    private OfferListener offerListener;
+    private static String invoiceText;
 
 
     Offer() {
@@ -28,7 +31,12 @@ public class Offer extends JFrame implements ActionListener {
         setLayout(null);
         initFrame();
         layoutFrame();
+        activateComps();
         setVisible(true);
+    }
+
+    public static String getPrice() {
+        return calculatePrice();
     }
 
     private void initFrame() {
@@ -104,13 +112,101 @@ public class Offer extends JFrame implements ActionListener {
 
     }
 
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-
-        if (e.getSource() == calculateButton) {
-            new Calculator();
+    public void activateComps() {
+        setOfferListener(new OfferListener() {
+            @Override
+            public void offerEventOccurred(OfferEvent oe) {
+                washing.setState(oe.isWashingChecked());
+                welding.setState(oe.isWeldingChecked());
+                painting.setState(oe.isPaintingChecked());
+                sandBlasting.setState(oe.isSandBlastingChecked());
+                overhaulingAndRepairOfStableEngines.setState(oe.isEngineRepairChecked());
+                repairOfElectricalEquipment.setState(oe.isElectricalRepairChecked());
+                startingDateTextField.setText(oe.getStartDate());
+                endingDateTextField.setText(oe.getEndDate());
+            }
+        });
+        if (offerListener != null) {
+            calculateButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    boolean isWashingChecked = washing.getState();
+                    boolean isWeldingChecked = welding.getState();
+                    boolean isPaintingChecked = painting.getState();
+                    boolean isSandBlastingChecked = sandBlasting.getState();
+                    boolean isOverhaulingAndRepairOfStableEnginesChecked = overhaulingAndRepairOfStableEngines.getState();
+                    boolean isRepairOfElectricalEquipmentChecked = repairOfElectricalEquipment.getState();
+                    String startingDate = startingDateTextField.getText();
+                    String endingDate = endingDateTextField.getText();
+                    OfferEvent oe = new OfferEvent(this, isWashingChecked, isWeldingChecked,
+                            isPaintingChecked, isSandBlastingChecked, isOverhaulingAndRepairOfStableEnginesChecked,
+                            isRepairOfElectricalEquipmentChecked, startingDate, endingDate);
+                    offerListener.offerEventOccurred(oe);
+                    calculate();
+                    new Calculator();
+                }
+            });
         }
 
     }
+
+    public void setOfferListener(OfferListener offerListener) {
+        this.offerListener = offerListener;
+    }
+
+    public void calculate() {
+        Date date = new Date();
+        String invoice = "INVOICE\n\n" + "Date: " + date.toString() + "\n\n" + "Services:\n\n";
+        if (washing.getState()) {
+            invoice += "WASHING\n";
+        }
+        if (welding.getState()) {
+            invoice += "WELDING\n";
+        }
+        if (painting.getState()) {
+            invoice += "PAINTING\n";
+        }
+        if (sandBlasting.getState()) {
+            invoice += "SAND BLASTING\n";
+        }
+        if (overhaulingAndRepairOfStableEngines.getState()) {
+            invoice += "OVERHAULING AND REPAIR OF STABLE ENGINES\n";
+        }
+        if (repairOfElectricalEquipment.getState()) {
+            invoice += "REPAIR OF ELECTRICAL EQUIPMENT\n";
+        }
+        invoice += "\n";
+        invoice += "Starting date: " + startingDateTextField.getText() + "\n";
+        invoice += "Ending date: " + endingDateTextField.getText() + "\n\n";
+        invoice += "Price: " + calculatePrice() + " EUR";
+        invoiceText = invoice;
+    }
+
+    public static String getInvoiceText() {
+        return invoiceText;
+    }
+
+    private static String calculatePrice() {
+        int price = 0;
+        if (washing.getState()) {
+            price += 200;
+        }
+        if (welding.getState()) {
+            price += 200;
+        }
+        if (painting.getState()) {
+            price += 350;
+        }
+        if (sandBlasting.getState()) {
+            price += 500;
+        }
+        if (overhaulingAndRepairOfStableEngines.getState()) {
+            price += 1000;
+        }
+        if (repairOfElectricalEquipment.getState()) {
+            price += 600;
+        }
+        return String.valueOf(price);
+    }
 }
+
