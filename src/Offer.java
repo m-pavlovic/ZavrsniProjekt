@@ -112,6 +112,7 @@ public class Offer extends JFrame {
 
     }
 
+
     public void activateComps() {
         setOfferListener(new OfferListener() {
             @Override
@@ -153,7 +154,9 @@ public class Offer extends JFrame {
     public void setOfferListener(OfferListener offerListener) {
         this.offerListener = offerListener;
     }
-
+/**
+calculate() method is used to calculate the price of the services that the user has chosen.
+ */
     public void calculate() {
         Date date = new Date();
         String invoice = "INVOICE\n\n" + "Date: " + date.toString() + "\n\n" + "Services:\n\n";
@@ -182,10 +185,18 @@ public class Offer extends JFrame {
         invoiceText = invoice;
     }
 
+    /**
+     * getInvoiceText() method is used to get the invoice text.
+     * @return the invoice text.
+     */
     public static String getInvoiceText() {
         return invoiceText;
     }
 
+    /**
+     * calculatePrice() method is used to calculate the price of the services that the user has chosen.
+     * @return the price of the services.
+     */
     private static String calculatePrice() {
         int price = 0;
         if (washing.getState()) {

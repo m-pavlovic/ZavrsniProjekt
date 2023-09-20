@@ -39,6 +39,13 @@ public class MainFrame extends JFrame {
         add(toolBarPanel, BorderLayout.NORTH);
     }
 
+    /**
+     * Activates the app
+     * 1. Sets the text on the text area
+     * 2. Clears the text area
+     * 3. Saves the text from the text area to a file
+     * 4. Enables the clear and save buttons
+     */
     private void activateApp() {
         bottomPanel.setBottomPanelListener(new BottomPanelListener() {
             @Override

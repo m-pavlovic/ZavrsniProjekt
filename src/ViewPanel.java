@@ -27,15 +27,25 @@ public class ViewPanel extends JPanel {
         add(scrollPane, BorderLayout.CENTER);
     }
 
+    /**
+     * Sets the text on the text area
+     * @param someText
+     */
     public void setTextOnTextArea(String someText) {
         textArea.append(someText + "\n");
     }
 
+    /**
+     * Clears the text area
+     */
     public void clearAll() {
         textArea.setText("");
     }
 
-
+    /**
+     * Saves the text from the text area to a file
+     * @param file
+     */
     public void saveToFile(File file) {
         try {
             FileOutputStream fos = new FileOutputStream(file);
