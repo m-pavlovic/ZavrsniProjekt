@@ -2,14 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.TreeMap;
-import java.util.TreeSet;
+import java.io.*;
+import java.util.*;
 
 public class Calculator extends JFrame implements ActionListener {
 
@@ -21,13 +15,10 @@ public class Calculator extends JFrame implements ActionListener {
     private static int invoiceCounter = 1;
     static int searchID;
     static String searchName;
-    static HashMap<String, String> invoiceMap;
-    static TreeMap<Integer, HashMap<String, String>> invoiceTreeMap;
+    static HashMap<String, String> invoiceMap = new HashMap<>();
 
 
     Calculator() {
-        invoiceTreeMap = new TreeMap<>();
-        invoiceMap = new HashMap<>();
         setTitle("Invoice");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 700);
@@ -92,10 +83,24 @@ public class Calculator extends JFrame implements ActionListener {
     }
 
     private void saveInvoice() {
-        invoiceMap.put(ViewPanel.customerInfo(), Offer.getInvoiceText());
-        invoiceTreeMap.put(invoiceCounter, invoiceMap);
-        saveToFile(invoiceTreeMap);
+        invoiceMap.put("Invoice ID", String.valueOf(invoiceCounter));
+        invoiceMap.put("Customer", ViewPanel.customerInfo());
+        saveToFile();
 
+    }
+
+    private void saveToFile() {
+        try {
+            File file = new File("invoices/invoice" + invoiceCounter + ".txt");
+            FileWriter fw = new FileWriter(file);
+            BufferedWriter bw = new BufferedWriter(fw);
+            for (Map.Entry<String, String> entry : invoiceMap.entrySet()) {
+                bw.write(entry.getKey() + ": " + entry.getValue() + "\n");
+            }
+            bw.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     static void searchInvoices() {
@@ -112,62 +117,36 @@ public class Calculator extends JFrame implements ActionListener {
     }
 
     private static void searchByID(int searchID) {
-        StringBuilder result = new StringBuilder();
-        for (HashMap<String, String> invoiceMap : invoiceTreeMap.values()) {
-            for (HashMap.Entry<String, String> entry : invoiceMap.entrySet()) {
-                if (entry.getKey().startsWith("Invoice") && entry.getKey().contains(String.valueOf(searchID))) {
-                    result.append(entry.getValue()).append("\n");
-                }
+        File file = new File("invoices/invoice" + searchID + ".txt");
+        if (file.exists()) {
+            try {
+                Desktop.getDesktop().open(file);
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(null, "Could not load file!", "Error", JOptionPane.ERROR_MESSAGE);
             }
-        }
-        if (result.length() > 0) {
-            invoiceTextArea.setText(result.toString());
         } else {
-            JOptionPane.showMessageDialog(null, "Invoice not found!");
+            JOptionPane.showMessageDialog(null, "Invoice does not exist!", "Error", JOptionPane.ERROR_MESSAGE);
         }
+
     }
 
     private static void searchByName(String searchName) {
-        StringBuilder result = new StringBuilder();
-        for (HashMap<String, String> invoiceMap : invoiceTreeMap.values()) {
-            for (HashMap.Entry<String, String> entry : invoiceMap.entrySet()) {
-                if (entry.getValue().toLowerCase().contains(searchName.toLowerCase())) {
-                    result.append(entry.getValue()).append("\n");
+        File folder = new File("invoices");
+        File[] listOfFiles = folder.listFiles();
+        for (File file : listOfFiles) {
+            if (file.isFile()) {
+                try {
+                    Scanner scanner = new Scanner(file);
+                    while (scanner.hasNextLine()) {
+                        String line = scanner.nextLine();
+                        if (line.contains(searchName)) {
+                            Desktop.getDesktop().open(file);
+                        }
+                    }
+                } catch (IOException e) {
+                    JOptionPane.showMessageDialog(null, "Could not load file!", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
         }
-        if (result.length() > 0) {
-            invoiceTextArea.setText(result.toString());
-        } else {
-            JOptionPane.showMessageDialog(null, "Invoice not found!");
-        }
     }
-
-
-    private void saveToFile(TreeMap<Integer, HashMap<String, String>> invoiceTreeMap) {
-        String filePath = "invoices/invoices.txt";
-        File invoicesDirectory = new File("invoices");
-
-        if (!invoicesDirectory.exists()) {
-            if (invoicesDirectory.mkdirs()) {
-                JOptionPane.showMessageDialog(null, "Created 'invoices' directory.");
-            } else {
-                JOptionPane.showMessageDialog(null, "Could not create 'invoices' directory.");
-                return;
-            }
-        }
-
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
-            for (HashMap.Entry<Integer, HashMap<String, String>> entry : invoiceTreeMap.entrySet()) {
-                writer.write("Invoice " + entry.getKey() + ":\n");
-                for (HashMap.Entry<String, String> invoiceEntry : entry.getValue().entrySet()) {
-                    writer.write(invoiceEntry.getKey() + ":\n");
-                    writer.write(invoiceEntry.getValue() + "\n");
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
 }

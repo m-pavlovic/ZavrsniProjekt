@@ -1,0 +1,8 @@
+Customer: Marija
+Nikolic
+Cash
+SamoJako
+Gulet
+65
+
+Invoice ID: 3

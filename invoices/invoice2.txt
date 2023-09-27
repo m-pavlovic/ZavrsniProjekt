@@ -1,0 +1,9 @@
+Customer: Stipe
+Stipic
+Card
+Brod
+Katamaran
+25
+
+
+Invoice ID: 2

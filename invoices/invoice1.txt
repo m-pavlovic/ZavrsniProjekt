@@ -1,0 +1,9 @@
+Customer: Marko
+Markic
+Card
+Nikita
+Jedrilica
+25
+
+
+Invoice ID: 1
