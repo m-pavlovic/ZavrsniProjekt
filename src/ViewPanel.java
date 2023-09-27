@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.HashMap;
 
 public class ViewPanel extends JPanel {
 

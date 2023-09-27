@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
 
 public class BottomPanel extends JPanel {
 
@@ -154,4 +155,5 @@ public class BottomPanel extends JPanel {
         typeOfShipBox.setSelectedIndex(0);
         shipLengthSlider.setValue(5);
     }
+
 }

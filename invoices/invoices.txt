@@ -1,0 +1,67 @@
+Invoice 1:
+Marko
+Markic
+Card
+Nikita
+Jedrilica
+25
+
+:
+INVOICE
+
+Date: Wed Sep 27 20:17:36 CEST 2023
+
+Services:
+
+WELDING
+PAINTING
+OVERHAULING AND REPAIR OF STABLE ENGINES
+
+Starting date: DD/MM/YYYY
+Ending date: DD/MM/YYYY
+
+Price: 1550 EUR
+Invoice 1:
+Marko
+Markic
+Card
+Nikita
+Jedrilica
+25
+
+:
+INVOICE
+
+Date: Wed Sep 27 20:22:48 CEST 2023
+
+Services:
+
+WELDING
+PAINTING
+
+Starting date: DD/MM/YYYY
+Ending date: DD/MM/YYYY
+
+Price: 550 EUR
+Invoice 1:
+Marko
+Markic
+Card
+Nikita
+Jedrilica
+25
+
+:
+INVOICE
+
+Date: Wed Sep 27 20:28:00 CEST 2023
+
+Services:
+
+WASHING
+PAINTING
+
+Starting date: DD/MM/YYYY
+Ending date: DD/MM/YYYY
+
+Price: 550 EUR

@@ -19,10 +19,15 @@ public class Calculator extends JFrame implements ActionListener {
     private JButton confirmButton;
     private JButton cancelButton;
     private static int invoiceCounter = 1;
+    static int searchID;
+    static String searchName;
+    static HashMap<String, String> invoiceMap;
+    static TreeMap<Integer, HashMap<String, String>> invoiceTreeMap;
 
 
     Calculator() {
-
+        invoiceTreeMap = new TreeMap<>();
+        invoiceMap = new HashMap<>();
         setTitle("Invoice");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 700);
@@ -58,7 +63,7 @@ public class Calculator extends JFrame implements ActionListener {
         priceTextArea.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
         priceTextArea.setText("---------------------------------------------\n" +
                 "---------------------------------------------\n" + "\nPRICE: " + Offer.getPrice() + " €\n"
-        + "---------------------------------------------\n" +
+                + "---------------------------------------------\n" +
                 "---------------------------------------------\n");
         add(priceTextArea);
         confirmButton.setBounds(500, 400, 200, 80);
@@ -87,12 +92,55 @@ public class Calculator extends JFrame implements ActionListener {
     }
 
     private void saveInvoice() {
-        HashMap<String, String> invoiceMap = new HashMap<>();
         invoiceMap.put(ViewPanel.customerInfo(), Offer.getInvoiceText());
-        TreeMap<Integer, HashMap<String, String>> invoiceTreeMap = new TreeMap<>();
         invoiceTreeMap.put(invoiceCounter, invoiceMap);
         saveToFile(invoiceTreeMap);
 
+    }
+
+    static void searchInvoices() {
+        String[] options = {"Search by ID", "Search by Name"};
+        int searchChoice = JOptionPane.showOptionDialog(null, "Search by ID or Name?", "Search",
+                JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
+        if (searchChoice == 0) {
+            searchID = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter ID: "));
+            searchByID(searchID);
+        } else if (searchChoice == 1) {
+            searchName = JOptionPane.showInputDialog(null, "Enter Name: ");
+            searchByName(searchName);
+        }
+    }
+
+    private static void searchByID(int searchID) {
+        StringBuilder result = new StringBuilder();
+        for (HashMap<String, String> invoiceMap : invoiceTreeMap.values()) {
+            for (HashMap.Entry<String, String> entry : invoiceMap.entrySet()) {
+                if (entry.getKey().startsWith("Invoice") && entry.getKey().contains(String.valueOf(searchID))) {
+                    result.append(entry.getValue()).append("\n");
+                }
+            }
+        }
+        if (result.length() > 0) {
+            invoiceTextArea.setText(result.toString());
+        } else {
+            JOptionPane.showMessageDialog(null, "Invoice not found!");
+        }
+    }
+
+    private static void searchByName(String searchName) {
+        StringBuilder result = new StringBuilder();
+        for (HashMap<String, String> invoiceMap : invoiceTreeMap.values()) {
+            for (HashMap.Entry<String, String> entry : invoiceMap.entrySet()) {
+                if (entry.getValue().toLowerCase().contains(searchName.toLowerCase())) {
+                    result.append(entry.getValue()).append("\n");
+                }
+            }
+        }
+        if (result.length() > 0) {
+            invoiceTextArea.setText(result.toString());
+        } else {
+            JOptionPane.showMessageDialog(null, "Invoice not found!");
+        }
     }
 
 
@@ -121,7 +169,5 @@ public class Calculator extends JFrame implements ActionListener {
             e.printStackTrace();
         }
     }
-
-
 
 }
