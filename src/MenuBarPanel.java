@@ -63,32 +63,26 @@ public class MenuBarPanel extends JPanel {
 
     public void activateComps() {
         if (menuBarListener != null) {
-            clearMenu.addActionListener(new ActionListener() {
+            load.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    MenuBarEvent tbe = new MenuBarEvent(this);
-                    menuBarListener.clearButtonEventOccurred(tbe);
+                    menuBarListener.loadEventOccurred(new MenuBarEvent(this));
                 }
             });
             save.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    MenuBarEvent tbe = new MenuBarEvent(this);
-                    menuBarListener.saveEventOccurred(tbe);
+                    menuBarListener.saveEventOccurred(new MenuBarEvent(this));
                 }
             });
-            load.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    MenuBarEvent tbe = new MenuBarEvent(this);
-                    menuBarListener.loadEventOccurred(tbe);
+            searchMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+                public void mouseClicked(java.awt.event.MouseEvent evt) {
+                    menuBarListener.searchEventOccurred(new MenuBarEvent(this));
                 }
             });
-            searchMenu.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    MenuBarEvent tbe = new MenuBarEvent(this);
-                    menuBarListener.searchEventOccurred(tbe);
+            clearMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+                public void mouseClicked(java.awt.event.MouseEvent evt) {
+                    menuBarListener.clearButtonEventOccurred(new MenuBarEvent(this));
                 }
             });
         }

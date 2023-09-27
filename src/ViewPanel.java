@@ -5,7 +5,7 @@ import java.io.FileOutputStream;
 
 public class ViewPanel extends JPanel {
 
-    private JTextArea textArea;
+    private static JTextArea textArea;
     private JScrollPane scrollPane;
     public ViewPanel() {
         initPanelComps();
@@ -54,5 +54,9 @@ public class ViewPanel extends JPanel {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Could not save file!", "Error", JOptionPane.ERROR_MESSAGE);
         }
+    }
+
+    public static String customerInfo() {
+        return textArea.getText();
     }
 }

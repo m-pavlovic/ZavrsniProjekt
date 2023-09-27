@@ -126,6 +126,7 @@ public class BottomPanel extends JPanel {
                     BottomPanelEvent bpe = new BottomPanelEvent(this, name, surname, payment, shipName, shipType, shipLength);
                     bottomPanelListener.bottomPanelEventOccurred(bpe);
                     resetForm();
+                    nextButton.setEnabled(true);
                 }
             });
             nextButton.addActionListener(new ActionListener() {

@@ -1,0 +1,43 @@
+Invoice 1:
+Marko
+Markic
+Cash
+asda
+Gulet
+5
+:
+INVOICE
+
+Date: Wed Sep 27 12:03:17 CEST 2023
+
+Services:
+
+WELDING
+SAND BLASTING
+OVERHAULING AND REPAIR OF STABLE ENGINES
+
+Starting date: 12/12/2023
+Ending date: 12/02/2024
+
+Price: 1700 EUR
+Invoice 2:
+Stipe
+Stpic
+Card
+Bla
+Gulet
+45
+:
+INVOICE
+
+Date: Wed Sep 27 12:04:47 CEST 2023
+
+Services:
+
+WELDING
+PAINTING
+
+Starting date: 10/10/2023
+Ending date: 10/05/2024
+
+Price: 550 EUR

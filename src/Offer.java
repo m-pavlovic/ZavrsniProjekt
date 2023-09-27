@@ -145,6 +145,7 @@ public class Offer extends JFrame {
                     offerListener.offerEventOccurred(oe);
                     calculate();
                     new Calculator();
+                    dispose();
                 }
             });
         }

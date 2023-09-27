@@ -2,6 +2,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.TreeMap;
+import java.util.TreeSet;
 
 public class Calculator extends JFrame implements ActionListener {
 
@@ -10,6 +17,7 @@ public class Calculator extends JFrame implements ActionListener {
     JTextArea priceTextArea;
     JButton confirmButton;
     JButton cancelButton;
+    int invoiceCounter = 1;
 
 
     Calculator() {
@@ -67,10 +75,49 @@ public class Calculator extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource() == confirmButton) {
+            saveInvoice();
+            invoiceCounter++;
             priceTextArea.setText("INVOICE SAVED");
         } else if (e.getSource() == cancelButton) {
-            priceTextArea.setText("INVOICE CANCELED");
+            cancelOrder();
         }
 
     }
+
+    private void cancelOrder() {
+        dispose();
+
+    }
+
+    private void saveInvoice() {
+        HashMap<String, String> invoiceMap = new HashMap<>();
+        invoiceMap.put(ViewPanel.customerInfo(), Offer.getInvoiceText());
+        TreeMap<Integer, HashMap<String, String>> invoiceTreeMap = new TreeMap<>();
+        invoiceTreeMap.put(invoiceCounter, invoiceMap);
+        System.out.println(invoiceTreeMap);
+        saveToFile(invoiceTreeMap);
+
+    }
+
+    private void saveToFile(TreeMap<Integer, HashMap<String, String>> invoiceTreeMap) {
+        String filePath = "invoices/invoices.txt";
+
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true));
+
+            for (HashMap.Entry<Integer, HashMap<String, String>> entry : invoiceTreeMap.entrySet()) {
+                writer.write("Invoice " + entry.getKey() + ":\n");
+                for (HashMap.Entry<String, String> invoiceEntry : entry.getValue().entrySet()) {
+                    writer.write(invoiceEntry.getKey() + ":\n");
+                    writer.write(invoiceEntry.getValue() + "\n");
+                }
+            }
+
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 }
