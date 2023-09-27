@@ -16,33 +16,25 @@ public class ViewPanel extends JPanel {
 
     private void initPanelComps() {
         textArea = new JTextArea();
-        textArea.setPreferredSize(new Dimension(800, 280));
+        textArea.setPreferredSize(new Dimension(800, 300));
         textArea.setEditable(false);
         scrollPane = new JScrollPane(textArea);
     }
 
     private void layoutComps() {
-        setLayout(new BorderLayout());
+
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        scrollPane.setWheelScrollingEnabled(true);
-        add(scrollPane, BorderLayout.CENTER);
+        scrollPane.setPreferredSize(new Dimension(800, 280));
+        add(scrollPane);
     }
 
     /**
      * Sets the text on the text area
      * @param someText
      */
-    public void setTextOnTextArea(String someText) {
+    public static void setTextOnTextArea(String someText) {
         textArea.append(someText + "\n");
-
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                JScrollBar verticalScrollBar = scrollPane.getVerticalScrollBar();
-                verticalScrollBar.setValue(verticalScrollBar.getMaximum());
-            }
-        });
     }
 
     /**
