@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Arrays;
@@ -13,11 +14,11 @@ import java.util.TreeSet;
 public class Calculator extends JFrame implements ActionListener {
 
     static JTextArea invoiceTextArea;
-    JScrollPane scrollPane;
-    JTextArea priceTextArea;
-    JButton confirmButton;
-    JButton cancelButton;
-    int invoiceCounter = 1;
+    private JScrollPane scrollPane;
+    private JTextArea priceTextArea;
+    private JButton confirmButton;
+    private JButton cancelButton;
+    private static int invoiceCounter = 1;
 
 
     Calculator() {
@@ -76,16 +77,12 @@ public class Calculator extends JFrame implements ActionListener {
 
         if (e.getSource() == confirmButton) {
             saveInvoice();
+            JOptionPane.showMessageDialog(null, "Invoice saved!");
             invoiceCounter++;
-            priceTextArea.setText("INVOICE SAVED");
+            dispose();
         } else if (e.getSource() == cancelButton) {
-            cancelOrder();
+            dispose();
         }
-
-    }
-
-    private void cancelOrder() {
-        dispose();
 
     }
 
@@ -94,17 +91,25 @@ public class Calculator extends JFrame implements ActionListener {
         invoiceMap.put(ViewPanel.customerInfo(), Offer.getInvoiceText());
         TreeMap<Integer, HashMap<String, String>> invoiceTreeMap = new TreeMap<>();
         invoiceTreeMap.put(invoiceCounter, invoiceMap);
-        System.out.println(invoiceTreeMap);
         saveToFile(invoiceTreeMap);
 
     }
 
+
     private void saveToFile(TreeMap<Integer, HashMap<String, String>> invoiceTreeMap) {
         String filePath = "invoices/invoices.txt";
+        File invoicesDirectory = new File("invoices");
 
-        try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true));
+        if (!invoicesDirectory.exists()) {
+            if (invoicesDirectory.mkdirs()) {
+                JOptionPane.showMessageDialog(null, "Created 'invoices' directory.");
+            } else {
+                JOptionPane.showMessageDialog(null, "Could not create 'invoices' directory.");
+                return;
+            }
+        }
 
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
             for (HashMap.Entry<Integer, HashMap<String, String>> entry : invoiceTreeMap.entrySet()) {
                 writer.write("Invoice " + entry.getKey() + ":\n");
                 for (HashMap.Entry<String, String> invoiceEntry : entry.getValue().entrySet()) {
@@ -112,12 +117,11 @@ public class Calculator extends JFrame implements ActionListener {
                     writer.write(invoiceEntry.getValue() + "\n");
                 }
             }
-
-            writer.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
 
 
 }

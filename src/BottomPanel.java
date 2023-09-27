@@ -117,23 +117,26 @@ public class BottomPanel extends JPanel {
             confirmButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    String name = nameField.getText();
-                    String surname = surnameField.getText();
-                    String payment = paymentGroup.getSelection().getActionCommand();
-                    String shipName = nameOfShipField.getText();
-                    String shipType = (String) typeOfShipBox.getSelectedItem();
-                    int shipLength = shipLengthSlider.getValue();
-                    BottomPanelEvent bpe = new BottomPanelEvent(this, name, surname, payment, shipName, shipType, shipLength);
-                    bottomPanelListener.bottomPanelEventOccurred(bpe);
-                    resetForm();
-                    nextButton.setEnabled(true);
+                    try {
+                        String name = nameField.getText();
+                        String surname = surnameField.getText();
+                        String payment = paymentGroup.getSelection().getActionCommand();
+                        String shipName = nameOfShipField.getText();
+                        String shipType = (String) typeOfShipBox.getSelectedItem();
+                        int shipLength = shipLengthSlider.getValue();
+                        BottomPanelEvent bpe = new BottomPanelEvent(this, name, surname, payment, shipName, shipType, shipLength);
+                        bottomPanelListener.bottomPanelEventOccurred(bpe);
+                        resetForm();
+                        nextButton.setEnabled(true);
+                    } catch (NullPointerException ex) {
+                        JOptionPane.showMessageDialog(null, "Please fill in all the fields!", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
                 }
             });
             nextButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     new Offer();
-                    nextButton.setEnabled(false);
                 }
             });
         }

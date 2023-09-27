@@ -24,6 +24,7 @@ public class ViewPanel extends JPanel {
         setLayout(new BorderLayout());
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPane.setWheelScrollingEnabled(true);
         add(scrollPane, BorderLayout.CENTER);
     }
 
@@ -33,6 +34,14 @@ public class ViewPanel extends JPanel {
      */
     public void setTextOnTextArea(String someText) {
         textArea.append(someText + "\n");
+
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                JScrollBar verticalScrollBar = scrollPane.getVerticalScrollBar();
+                verticalScrollBar.setValue(verticalScrollBar.getMaximum());
+            }
+        });
     }
 
     /**
