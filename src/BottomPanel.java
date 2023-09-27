@@ -57,7 +57,7 @@ public class BottomPanel extends JPanel {
         paymentGroup = new ButtonGroup();
         paymentGroup.add(radioCash);
         paymentGroup.add(radioCard);
-        icon = new ImageIcon("anchor.jpg");
+        icon = new ImageIcon("icons/anchor.jpg");
         iconLabel = new JLabel(icon);
         nextButton = new JButton("Next");
     }
@@ -126,8 +126,6 @@ public class BottomPanel extends JPanel {
                     BottomPanelEvent bpe = new BottomPanelEvent(this, name, surname, payment, shipName, shipType, shipLength);
                     bottomPanelListener.bottomPanelEventOccurred(bpe);
                     resetForm();
-                    ToolBarPanel.clearButton.setEnabled(true);
-                    ToolBarPanel.saveButton.setEnabled(true);
                 }
             });
             nextButton.addActionListener(new ActionListener() {

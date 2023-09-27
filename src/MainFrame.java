@@ -2,12 +2,13 @@ import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.io.File;
+import java.io.FileInputStream;
 
 public class MainFrame extends JFrame {
 
     private ViewPanel viewPanel;
     private BottomPanel bottomPanel;
-    private ToolBarPanel toolBarPanel;
+    private MenuBarPanel menuBarPanel;
     private JFileChooser fileChooser;
 
 
@@ -26,7 +27,7 @@ public class MainFrame extends JFrame {
     private void initFrameComps() {
         viewPanel = new ViewPanel();
         bottomPanel = new BottomPanel();
-        toolBarPanel = new ToolBarPanel();
+        menuBarPanel = new MenuBarPanel();
         fileChooser = new JFileChooser();
         fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("Text Files", "txt"));
 
@@ -36,7 +37,7 @@ public class MainFrame extends JFrame {
         setLayout(new BorderLayout());
         add(viewPanel, BorderLayout.CENTER);
         add(bottomPanel, BorderLayout.SOUTH);
-        add(toolBarPanel, BorderLayout.NORTH);
+        add(menuBarPanel, BorderLayout.NORTH);
     }
 
     /**
@@ -61,24 +62,58 @@ public class MainFrame extends JFrame {
 
         bottomPanel.activateComps();
 
-        toolBarPanel.setToolBarListener(new ToolBarListener() {
+        menuBarPanel.setMenuBarListener(new MenuBarListener() {
             @Override
-            public void clearButtonEventOccurred(ToolBarEvent tbe) {
+            public void clearButtonEventOccurred(MenuBarEvent tbe) {
                 viewPanel.clearAll();
                 bottomPanel.resetForm();
             }
 
             @Override
-            public void saveEventOccurred(ToolBarEvent tbe) {
+            public void saveEventOccurred(MenuBarEvent tbe) {
                 int value = fileChooser.showSaveDialog(MainFrame.this);
                 if (JFileChooser.APPROVE_OPTION == value) {
                     File file = fileChooser.getSelectedFile();
                     viewPanel.saveToFile(file);
                 }
             }
+
+            @Override
+            public void loadEventOccurred(MenuBarEvent tbe) {
+                int value = fileChooser.showOpenDialog(MainFrame.this);
+                if (JFileChooser.APPROVE_OPTION == value) {
+                    File file = fileChooser.getSelectedFile();
+                    viewPanel.clearAll();
+                    FileInputStream fis = null;
+                    try {
+                        fis = new FileInputStream(file);
+                        byte[] buffer = new byte[1024];
+                        int read;
+                        while ((read = fis.read(buffer)) != -1) {
+                            String text = new String(buffer, 0, read);
+                            viewPanel.setTextOnTextArea(text);
+                        }
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, "Could not load file!", "Error", JOptionPane.ERROR_MESSAGE);
+                    } finally {
+                        try {
+                            fis.close();
+                        } catch (Exception e) {
+                            JOptionPane.showMessageDialog(null, "Could not close file!", "Error", JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
+                }
+
+            }
+
+            @Override
+            public void searchEventOccurred(MenuBarEvent tbe) {
+
+
+            }
         });
 
-        toolBarPanel.activateComps();
+        menuBarPanel.activateComps();
     }
 
 
