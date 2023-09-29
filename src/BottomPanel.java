@@ -113,6 +113,14 @@ public class BottomPanel extends JPanel {
 
     }
 
+    /**
+     * Activates the components
+     * 1. Adds action listener to the confirm button
+     * 2. Adds action listener to the next button
+     * 3. Creates a new BottomPanelEvent object
+     * 4. Calls the bottomPanelEventOccurred method from the BottomPanelListener interface
+     */
+
     public void activateComps() {
         if (bottomPanelListener != null) {
             confirmButton.addActionListener(new ActionListener() {
@@ -146,6 +154,10 @@ public class BottomPanel extends JPanel {
     public void setBottomPanelListener(BottomPanelListener bottomPanelListener) {
         this.bottomPanelListener = bottomPanelListener;
     }
+
+    /**
+     * Resets the form
+     */
 
     public void resetForm() {
         nameField.setText(null);
