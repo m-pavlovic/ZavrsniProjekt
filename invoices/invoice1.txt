@@ -1,24 +1,22 @@
 ------------------------------------------------------------
 OFFER: INVOICE
 
-Date: Fri Sep 29 17:43:55 CEST 2023
+Date: Fri Sep 29 17:50:00 CEST 2023
 
 Services:
 
-WASHING
 WELDING
-PAINTING
 
-Starting date: 11/12/2023
-Ending date: 05/02/2024
+Starting date: 02/12/2023
+Ending date: 08/01/2024
 
-Price: 750 EUR
+Price: 200 EUR
 ------------------------------------------------------------
-Customer: Marija
-Nikolic
+Customer: Kristina
+Separovic
 Cash
-ImaSeMozeSe
-Jahta
-55
+Sirotinja
+Koća
+30
 
 Invoice ID: 1

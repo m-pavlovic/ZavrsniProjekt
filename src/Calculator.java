@@ -183,6 +183,8 @@ public class Calculator extends JFrame implements ActionListener {
                         String line = scanner.nextLine();
                         if (line.contains(searchName)) {
                             Desktop.getDesktop().open(file);
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Invoice does not exist!", "Error", JOptionPane.ERROR_MESSAGE);
                         }
                     }
                 } catch (IOException e) {
