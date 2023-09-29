@@ -1,8 +1,22 @@
-Customer: Stipe
-Stipic
+------------------------------------------------------------
+OFFER: INVOICE
+
+Date: Fri Sep 29 16:49:14 CEST 2023
+
+Services:
+
+SAND BLASTING
+
+Starting date: DD/MM/YYYY
+Ending date: DD/MM/YYYY
+
+Price: 500 EUR
+------------------------------------------------------------
+Customer: Marko
+Markic
 Card
-Brod
-Katamaran
+Nikita
+Jedrilica
 25
 
 

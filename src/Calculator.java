@@ -84,12 +84,21 @@ public class Calculator extends JFrame implements ActionListener {
 
     private void saveInvoice() {
         invoiceMap.put("Invoice ID", String.valueOf(invoiceCounter));
-        invoiceMap.put("Customer", ViewPanel.customerInfo());
+        invoiceMap.put("------------------------------------------------------------\nCustomer", ViewPanel.customerInfo());
+        invoiceMap.put("------------------------------------------------------------\nOFFER", Offer.getInvoiceText());
         saveToFile();
 
     }
 
+    private void checkIfFolderExists() {
+        File folder = new File("invoices");
+        if (!folder.exists()) {
+            folder.mkdir();
+        }
+    }
+
     private void saveToFile() {
+        checkIfFolderExists();
         try {
             File file = new File("invoices/invoice" + invoiceCounter + ".txt");
             FileWriter fw = new FileWriter(file);
