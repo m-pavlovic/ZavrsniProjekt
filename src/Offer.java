@@ -112,6 +112,17 @@ public class Offer extends JFrame {
 
     }
 
+    /**
+     * Activates the components
+     * 1. Sets the offer listener
+     * 2. Adds action listener to the calculate button
+     * 3. Creates a new OfferEvent object
+     * 4. Calls the offerEventOccurred method from the OfferListener interface
+     * 5. Calls the calculate method
+     * 6. Creates a new Calculator object
+     * 7. Disposes the frame
+     */
+
 
     public void activateComps() {
         setOfferListener(new OfferListener() {

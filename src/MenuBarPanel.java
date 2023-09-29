@@ -61,6 +61,14 @@ public class MenuBarPanel extends JPanel {
         this.menuBarListener = menuBarListener;
     }
 
+    /**
+     * Activates the components
+     * 1. Loads the file
+     * 2. Saves the file
+     * 3. Searches for an invoice
+     * 4. Clears the text area
+     */
+
     public void activateComps() {
         if (menuBarListener != null) {
             load.addActionListener(new ActionListener() {

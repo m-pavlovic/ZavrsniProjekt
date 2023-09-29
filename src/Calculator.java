@@ -30,6 +30,9 @@ public class Calculator extends JFrame implements ActionListener {
 
     }
 
+    /**
+     * Initializes the frame components
+     */
     private void initFrame() {
         invoiceTextArea = new JTextArea();
         scrollPane = new JScrollPane(invoiceTextArea);
@@ -37,6 +40,10 @@ public class Calculator extends JFrame implements ActionListener {
         confirmButton = new JButton("Confirm");
         cancelButton = new JButton("Cancel");
     }
+
+    /**
+     * Lays out the frame components
+     */
 
     private void layoutFrame() {
         invoiceTextArea.setPreferredSize(new Dimension(400, 700));
@@ -82,14 +89,35 @@ public class Calculator extends JFrame implements ActionListener {
 
     }
 
+    /**
+     * Saves the invoice to a file using a HashMap
+     */
+
     private void saveInvoice() {
         invoiceMap.put("Invoice ID", String.valueOf(invoiceCounter));
-        invoiceMap.put("Customer", ViewPanel.customerInfo());
+        invoiceMap.put("------------------------------------------------------------\nCustomer", ViewPanel.customerInfo());
+        invoiceMap.put("------------------------------------------------------------\nOFFER", Offer.getInvoiceText());
         saveToFile();
 
     }
 
+    /**
+     * Checks if the folder exists, if not, creates it
+     */
+
+    private void checkIfFolderExists() {
+        File folder = new File("invoices");
+        if (!folder.exists()) {
+            folder.mkdir();
+        }
+    }
+
+    /**
+     * calls the checkIfFolderExists method and saves the invoice to a file
+     */
+
     private void saveToFile() {
+        checkIfFolderExists();
         try {
             File file = new File("invoices/invoice" + invoiceCounter + ".txt");
             FileWriter fw = new FileWriter(file);
@@ -102,6 +130,10 @@ public class Calculator extends JFrame implements ActionListener {
             throw new RuntimeException(e);
         }
     }
+
+    /**
+     * Opens a pane with options to search by ID or Name
+     */
 
     static void searchInvoices() {
         String[] options = {"Search by ID", "Search by Name"};
@@ -116,6 +148,11 @@ public class Calculator extends JFrame implements ActionListener {
         }
     }
 
+    /**
+     * Searches for an invoice by ID
+     * @param searchID
+     */
+
     private static void searchByID(int searchID) {
         File file = new File("invoices/invoice" + searchID + ".txt");
         if (file.exists()) {
@@ -129,6 +166,11 @@ public class Calculator extends JFrame implements ActionListener {
         }
 
     }
+
+    /**
+     * Searches for an invoice by Name
+     * @param searchName
+     */
 
     private static void searchByName(String searchName) {
         File folder = new File("invoices");

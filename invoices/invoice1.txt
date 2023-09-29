@@ -1,9 +1,23 @@
-Customer: Marko
-Markic
-Card
-Nikita
-Jedrilica
-25
+------------------------------------------------------------
+OFFER: INVOICE
 
+Date: Fri Sep 29 16:48:57 CEST 2023
+
+Services:
+
+WASHING
+PAINTING
+
+Starting date: DD/MM/YYYY
+Ending date: DD/MM/YYYY
+
+Price: 550 EUR
+------------------------------------------------------------
+Customer: sdasf
+sdad
+Card
+dsada
+Jedrilica
+36
 
 Invoice ID: 1

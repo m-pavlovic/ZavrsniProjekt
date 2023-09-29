@@ -58,6 +58,11 @@ public class ViewPanel extends JPanel {
         }
     }
 
+    /**
+     * Returns the text from the text area with all the customer info
+     * @return
+     */
+
     public static String customerInfo() {
         return textArea.getText();
     }
