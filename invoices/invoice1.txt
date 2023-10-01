@@ -1,24 +1,23 @@
 ------------------------------------------------------------
 OFFER: INVOICE
 
-Date: Sun Oct 01 10:16:57 CEST 2023
+Date: 01/10/2023
 
 Services:
 
 WASHING
-WELDING
 
-Starting date: DD/MM/YYYY
-Ending date: DD/MM/YYYY
+Starting date: Sat Nov 11 00:00:00 CET 2023
+Ending date: Wed Apr 10 00:00:00 CEST 2024
 
-Price: 400 EUR
+Price: 200 EUR
 ------------------------------------------------------------
-Customer: Kristina
-Separovic
-Card
-Sirotinja
-Koća
-25
+Customer: Marija
+Nikolic
+Cash
+ImaSeMozeSe
+Jahta
+65
 
 
 Invoice ID: 1

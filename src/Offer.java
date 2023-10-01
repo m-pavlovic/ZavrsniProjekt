@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Offer extends JFrame {
@@ -21,6 +22,10 @@ public class Offer extends JFrame {
     JButton calculateButton;
     private OfferListener offerListener;
     private static String invoiceText;
+    Date currentDate = new Date();
+    Date startDate;
+    Date endDate;
+    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 
 
     Offer() {
@@ -155,9 +160,12 @@ public class Offer extends JFrame {
                             isPaintingChecked, isSandBlastingChecked, isOverhaulingAndRepairOfStableEnginesChecked,
                             isRepairOfElectricalEquipmentChecked, startingDate, endingDate);
                     offerListener.offerEventOccurred(oe);
-                    calculate();
-                    new Calculator();
-                    dispose();
+                    if (checkDate() == true) {
+                        calculate();
+                        new Calculator();
+                        dispose();
+                    }
+
                 }
             });
         }
@@ -167,12 +175,36 @@ public class Offer extends JFrame {
     public void setOfferListener(OfferListener offerListener) {
         this.offerListener = offerListener;
     }
-/**
-calculate() method is used to calculate the price of the services that the user has chosen.
- */
+    /**
+    calculate() method is used to calculate the price of the services that the user has chosen.
+     */
+    public boolean checkDate() {
+        try {
+            startDate = formatter.parse(startingDateTextField.getText());
+            endDate = formatter.parse(endingDateTextField.getText());
+            currentDate = formatter.parse(formatter.format(currentDate));
+            if (startDate.after(endDate)) {
+                JOptionPane.showMessageDialog(null, "The starting date cannot be after the ending date!", "Error", JOptionPane.ERROR_MESSAGE);
+                return false;
+            } else if (startDate.before(currentDate)) {
+                JOptionPane.showMessageDialog(null, "The starting date cannot be before the current date!", "Error", JOptionPane.ERROR_MESSAGE);
+                return false;
+            } else if (endDate.before(currentDate)) {
+                JOptionPane.showMessageDialog(null, "The ending date cannot be before the current date!", "Error", JOptionPane.ERROR_MESSAGE);
+                return false;
+            } else if (startDate.equals(endDate)) {
+                JOptionPane.showMessageDialog(null, "The starting date cannot be the same as the ending date!", "Error", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Please enter a valid date!", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        return true;
+    }
     public void calculate() {
-        Date date = new Date();
-        String invoice = "INVOICE\n\n" + "Date: " + date.toString() + "\n\n" + "Services:\n\n";
+
+        String invoice = "INVOICE\n\n" + "Date: " + formatter.format(currentDate) + "\n\n" + "Services:\n\n";
         if (washing.getState()) {
             invoice += "WASHING\n";
         }
@@ -192,8 +224,8 @@ calculate() method is used to calculate the price of the services that the user 
             invoice += "REPAIR OF ELECTRICAL EQUIPMENT\n";
         }
         invoice += "\n";
-        invoice += "Starting date: " + startingDateTextField.getText() + "\n";
-        invoice += "Ending date: " + endingDateTextField.getText() + "\n\n";
+        invoice += "Starting date: " + startDate + "\n";
+        invoice += "Ending date: " + endDate + "\n\n";
         invoice += "Price: " + calculatePrice() + " EUR";
         invoiceText = invoice;
     }

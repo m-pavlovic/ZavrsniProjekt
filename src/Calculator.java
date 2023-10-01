@@ -3,6 +3,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class Calculator extends JFrame implements ActionListener {
@@ -15,6 +17,7 @@ public class Calculator extends JFrame implements ActionListener {
     private static int invoiceCounter = 1;
     static int searchID;
     static String searchName;
+    static String searchDate;
     static HashMap<String, String> invoiceMap = new HashMap<>();
 
 
@@ -136,17 +139,66 @@ public class Calculator extends JFrame implements ActionListener {
      */
 
     static void searchInvoices() {
-        String[] options = {"Search by ID", "Search by Name"};
-        int searchChoice = JOptionPane.showOptionDialog(null, "Search by ID or Name?", "Search",
+        String[] options = {"Search by ID", "Search by Name", "Search by Date"};
+        int searchChoice = JOptionPane.showOptionDialog(null, "Search by ID, Name or Date?", "Search",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
         if (searchChoice == 0) {
             searchID = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter ID: "));
-            searchByID(searchID);
+            if (JOptionPane.CANCEL_OPTION == 2) {
+                JOptionPane.showMessageDialog(null, "Search cancelled!", "Message", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                searchByID(searchID);
+            }
         } else if (searchChoice == 1) {
             searchName = JOptionPane.showInputDialog(null, "Enter Name: ");
-            searchByName(searchName);
+            if (JOptionPane.CANCEL_OPTION == 2) {
+                JOptionPane.showMessageDialog(null, "Search cancelled!", "Message", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                searchByName(searchName);
+            }
+        } else if (searchChoice == 2) {
+            searchDate = JOptionPane.showInputDialog(null, "Enter Date: ");
+            if (JOptionPane.CANCEL_OPTION == 2) {
+                JOptionPane.showMessageDialog(null, "Search cancelled!", "Message", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                searchByDate();
+            }
         }
     }
+
+    /**
+     * Searches for an invoice by Date
+     */
+
+    private static void searchByDate() {
+        File folder = new File("invoices");
+        File[] listOfFiles = folder.listFiles();
+
+        boolean found = false;
+
+        for (File file : listOfFiles != null ? listOfFiles : new File[0]) {
+            if (!file.isFile()) continue;
+
+            try (Scanner scanner = new Scanner(file)) {
+                while (scanner.hasNextLine()) {
+                    String line = scanner.nextLine();
+                    if (line.contains(searchDate)) {
+                        Desktop.getDesktop().open(file);
+                        found = true;
+                        break;
+                    }
+                }
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(null, "Could not load file!", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+
+        if (!found) {
+            JOptionPane.showMessageDialog(null, "Invoice does not exist!", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+
 
     /**
      * Searches for an invoice by ID
