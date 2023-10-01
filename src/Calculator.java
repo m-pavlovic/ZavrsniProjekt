@@ -175,22 +175,28 @@ public class Calculator extends JFrame implements ActionListener {
     private static void searchByName(String searchName) {
         File folder = new File("invoices");
         File[] listOfFiles = folder.listFiles();
-        for (File file : listOfFiles) {
-            if (file.isFile()) {
-                try {
-                    Scanner scanner = new Scanner(file);
-                    while (scanner.hasNextLine()) {
-                        String line = scanner.nextLine();
-                        if (line.contains(searchName)) {
-                            Desktop.getDesktop().open(file);
-                        } else {
-                            JOptionPane.showMessageDialog(null, "Invoice does not exist!", "Error", JOptionPane.ERROR_MESSAGE);
-                        }
+
+        boolean found = false;
+
+        for (File file : listOfFiles != null ? listOfFiles : new File[0]) {
+            if (!file.isFile()) continue;
+
+            try (Scanner scanner = new Scanner(file)) {
+                while (scanner.hasNextLine()) {
+                    String line = scanner.nextLine().toLowerCase();
+                    if (line.contains(searchName.toLowerCase())) {
+                        Desktop.getDesktop().open(file);
+                        found = true;
+                        break;
                     }
-                } catch (IOException e) {
-                    JOptionPane.showMessageDialog(null, "Could not load file!", "Error", JOptionPane.ERROR_MESSAGE);
                 }
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(null, "Could not load file!", "Error", JOptionPane.ERROR_MESSAGE);
             }
+        }
+
+        if (!found) {
+            JOptionPane.showMessageDialog(null, "Invoice does not exist!", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 }
