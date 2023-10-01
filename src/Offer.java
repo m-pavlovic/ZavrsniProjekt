@@ -175,8 +175,10 @@ public class Offer extends JFrame {
     public void setOfferListener(OfferListener offerListener) {
         this.offerListener = offerListener;
     }
+
     /**
-    calculate() method is used to calculate the price of the services that the user has chosen.
+     * Checks if the date is valid
+     * @return true if the date is valid, false if not
      */
     public boolean checkDate() {
         try {
@@ -202,6 +204,10 @@ public class Offer extends JFrame {
         }
         return true;
     }
+
+    /**
+     calculate() method is used to calculate the price of the services that the user has chosen.
+     */
     public void calculate() {
 
         String invoice = "INVOICE\n\n" + "Date: " + formatter.format(currentDate) + "\n\n" + "Services:\n\n";
