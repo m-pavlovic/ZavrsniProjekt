@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
 
 public class BottomPanel extends JPanel {
 
@@ -57,7 +58,7 @@ public class BottomPanel extends JPanel {
         paymentGroup = new ButtonGroup();
         paymentGroup.add(radioCash);
         paymentGroup.add(radioCard);
-        icon = new ImageIcon("anchor.jpg");
+        icon = new ImageIcon("icons/anchor.jpg");
         iconLabel = new JLabel(icon);
         nextButton = new JButton("Next");
     }
@@ -112,29 +113,39 @@ public class BottomPanel extends JPanel {
 
     }
 
+    /**
+     * Activates the components
+     * 1. Adds action listener to the confirm button
+     * 2. Adds action listener to the next button
+     * 3. Creates a new BottomPanelEvent object
+     * 4. Calls the bottomPanelEventOccurred method from the BottomPanelListener interface
+     */
+
     public void activateComps() {
         if (bottomPanelListener != null) {
             confirmButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    String name = nameField.getText();
-                    String surname = surnameField.getText();
-                    String payment = paymentGroup.getSelection().getActionCommand();
-                    String shipName = nameOfShipField.getText();
-                    String shipType = (String) typeOfShipBox.getSelectedItem();
-                    int shipLength = shipLengthSlider.getValue();
-                    BottomPanelEvent bpe = new BottomPanelEvent(this, name, surname, payment, shipName, shipType, shipLength);
-                    bottomPanelListener.bottomPanelEventOccurred(bpe);
-                    resetForm();
-                    ToolBarPanel.clearButton.setEnabled(true);
-                    ToolBarPanel.saveButton.setEnabled(true);
+                    try {
+                        String name = nameField.getText();
+                        String surname = surnameField.getText();
+                        String payment = paymentGroup.getSelection().getActionCommand();
+                        String shipName = nameOfShipField.getText();
+                        String shipType = (String) typeOfShipBox.getSelectedItem();
+                        int shipLength = shipLengthSlider.getValue();
+                        BottomPanelEvent bpe = new BottomPanelEvent(this, name, surname, payment, shipName, shipType, shipLength);
+                        bottomPanelListener.bottomPanelEventOccurred(bpe);
+                        resetForm();
+                        nextButton.setEnabled(true);
+                    } catch (NullPointerException ex) {
+                        JOptionPane.showMessageDialog(null, "Please fill in all the fields!", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
                 }
             });
             nextButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     new Offer();
-                    nextButton.setEnabled(false);
                 }
             });
         }
@@ -144,6 +155,10 @@ public class BottomPanel extends JPanel {
         this.bottomPanelListener = bottomPanelListener;
     }
 
+    /**
+     * Resets the form
+     */
+
     public void resetForm() {
         nameField.setText(null);
         surnameField.setText(null);
@@ -152,4 +167,5 @@ public class BottomPanel extends JPanel {
         typeOfShipBox.setSelectedIndex(0);
         shipLengthSlider.setValue(5);
     }
+
 }

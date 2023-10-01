@@ -1,0 +1,24 @@
+------------------------------------------------------------
+OFFER: INVOICE
+
+Date: Sun Oct 01 07:40:35 CEST 2023
+
+Services:
+
+WASHING
+WELDING
+
+Starting date: 12/12/2023
+Ending date: 12/01/2024
+
+Price: 400 EUR
+------------------------------------------------------------
+Customer: Kristina
+Separovic
+Card
+Sirotinja
+Koća
+25
+
+
+Invoice ID: 1

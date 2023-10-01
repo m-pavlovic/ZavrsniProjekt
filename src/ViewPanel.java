@@ -2,10 +2,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.HashMap;
 
 public class ViewPanel extends JPanel {
 
-    private JTextArea textArea;
+    private static JTextArea textArea;
     private JScrollPane scrollPane;
     public ViewPanel() {
         initPanelComps();
@@ -15,23 +16,24 @@ public class ViewPanel extends JPanel {
 
     private void initPanelComps() {
         textArea = new JTextArea();
-        textArea.setPreferredSize(new Dimension(800, 280));
+        textArea.setPreferredSize(new Dimension(800, 300));
         textArea.setEditable(false);
         scrollPane = new JScrollPane(textArea);
     }
 
     private void layoutComps() {
-        setLayout(new BorderLayout());
+
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        add(scrollPane, BorderLayout.CENTER);
+        scrollPane.setPreferredSize(new Dimension(800, 280));
+        add(scrollPane);
     }
 
     /**
      * Sets the text on the text area
      * @param someText
      */
-    public void setTextOnTextArea(String someText) {
+    public static void setTextOnTextArea(String someText) {
         textArea.append(someText + "\n");
     }
 
@@ -54,5 +56,14 @@ public class ViewPanel extends JPanel {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Could not save file!", "Error", JOptionPane.ERROR_MESSAGE);
         }
+    }
+
+    /**
+     * Returns the text from the text area with all the customer info
+     * @return
+     */
+
+    public static String customerInfo() {
+        return textArea.getText();
     }
 }
