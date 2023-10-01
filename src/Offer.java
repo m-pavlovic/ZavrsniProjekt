@@ -17,15 +17,15 @@ public class Offer extends JFrame {
     JLabel checkBoxLabel;
     JLabel startingDateLabel;
     JLabel endingDateLabel;
-    JTextField startingDateTextField;
-    JTextField endingDateTextField;
+    static JTextField startingDateTextField;
+    static JTextField endingDateTextField;
     JButton calculateButton;
     private OfferListener offerListener;
     private static String invoiceText;
-    Date currentDate = new Date();
-    Date startDate;
-    Date endDate;
-    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+    static Date currentDate = new Date();
+    static Date startDate;
+    static Date endDate;
+    static SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 
 
     Offer() {
@@ -160,7 +160,7 @@ public class Offer extends JFrame {
                             isPaintingChecked, isSandBlastingChecked, isOverhaulingAndRepairOfStableEnginesChecked,
                             isRepairOfElectricalEquipmentChecked, startingDate, endingDate);
                     offerListener.offerEventOccurred(oe);
-                    if (checkDate() == true) {
+                    if (checkDate(startingDate) && checkDate(endingDate)) {
                         calculate();
                         new Calculator();
                         dispose();
@@ -180,26 +180,12 @@ public class Offer extends JFrame {
      * Checks if the date is valid
      * @return true if the date is valid, false if not
      */
-    public boolean checkDate() {
+    public static boolean checkDate(String searchDate) {
         try {
-            startDate = formatter.parse(startingDateTextField.getText());
-            endDate = formatter.parse(endingDateTextField.getText());
-            currentDate = formatter.parse(formatter.format(currentDate));
-            if (startDate.after(endDate)) {
-                JOptionPane.showMessageDialog(null, "The starting date cannot be after the ending date!", "Error", JOptionPane.ERROR_MESSAGE);
-                return false;
-            } else if (startDate.before(currentDate)) {
-                JOptionPane.showMessageDialog(null, "The starting date cannot be before the current date!", "Error", JOptionPane.ERROR_MESSAGE);
-                return false;
-            } else if (endDate.before(currentDate)) {
-                JOptionPane.showMessageDialog(null, "The ending date cannot be before the current date!", "Error", JOptionPane.ERROR_MESSAGE);
-                return false;
-            } else if (startDate.equals(endDate)) {
-                JOptionPane.showMessageDialog(null, "The starting date cannot be the same as the ending date!", "Error", JOptionPane.ERROR_MESSAGE);
-                return false;
-            }
+            formatter.setLenient(false);
+            formatter.parse(searchDate);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Please enter a valid date!", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Invalid date!");
             return false;
         }
         return true;
@@ -230,8 +216,8 @@ public class Offer extends JFrame {
             invoice += "REPAIR OF ELECTRICAL EQUIPMENT\n";
         }
         invoice += "\n";
-        invoice += "Starting date: " + startDate + "\n";
-        invoice += "Ending date: " + endDate + "\n\n";
+        invoice += "Starting date: " + startingDateTextField.getText() + "\n";
+        invoice += "Ending date: " + endingDateTextField.getText() + "\n\n";
         invoice += "Price: " + calculatePrice() + " EUR";
         invoiceText = invoice;
     }

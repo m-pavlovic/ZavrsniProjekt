@@ -6,18 +6,20 @@ Date: 01/10/2023
 Services:
 
 WASHING
+PAINTING
+SAND BLASTING
 
-Starting date: Sat Nov 11 00:00:00 CET 2023
-Ending date: Wed Apr 10 00:00:00 CEST 2024
+Starting date: null
+Ending date: null
 
-Price: 200 EUR
+Price: 1050 EUR
 ------------------------------------------------------------
-Customer: Marija
-Nikolic
+Customer: Faust
+Is
 Cash
-ImaSeMozeSe
-Jahta
-65
+Minor
+Jedrilica
+40
 
 
 Invoice ID: 1

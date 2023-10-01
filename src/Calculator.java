@@ -140,31 +140,39 @@ public class Calculator extends JFrame implements ActionListener {
 
     static void searchInvoices() {
         String[] options = {"Search by ID", "Search by Name", "Search by Date"};
-        int searchChoice = JOptionPane.showOptionDialog(null, "Search by ID, Name or Date?", "Search",
+        int searchChoice = JOptionPane.showOptionDialog(null, "Search by ID, Name, or Date?", "Search",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
-        if (searchChoice == 0) {
-            searchID = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter ID: "));
-            if (JOptionPane.CANCEL_OPTION == 2) {
-                JOptionPane.showMessageDialog(null, "Search cancelled!", "Message", JOptionPane.INFORMATION_MESSAGE);
-            } else {
-                searchByID(searchID);
-            }
-        } else if (searchChoice == 1) {
-            searchName = JOptionPane.showInputDialog(null, "Enter Name: ");
-            if (JOptionPane.CANCEL_OPTION == 2) {
-                JOptionPane.showMessageDialog(null, "Search cancelled!", "Message", JOptionPane.INFORMATION_MESSAGE);
-            } else {
-                searchByName(searchName);
-            }
-        } else if (searchChoice == 2) {
-            searchDate = JOptionPane.showInputDialog(null, "Enter Date: ");
-            if (JOptionPane.CANCEL_OPTION == 2) {
-                JOptionPane.showMessageDialog(null, "Search cancelled!", "Message", JOptionPane.INFORMATION_MESSAGE);
-            } else {
-                searchByDate();
+
+        if (searchChoice == JOptionPane.CLOSED_OPTION) {
+            JOptionPane.showMessageDialog(null, "Search canceled!", "Message", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            if (searchChoice == 0) {
+                try {
+                    searchID = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter ID: "));
+                    if (searchID > 0) {
+                        searchByID(searchID);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "ID must be a positive number!", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(null, "Enter a valid ID!", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            } else if (searchChoice == 1) {
+                searchName = JOptionPane.showInputDialog(null, "Enter Name: ");
+                if (!Objects.equals(searchName, "")) {
+                    searchByName(searchName);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Enter a name!", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            } else if (searchChoice == 2) {
+                searchDate = JOptionPane.showInputDialog(null, "Enter Date in format dd/MM/yyyy: ");
+                if (Offer.checkDate(searchDate)) {
+                    searchByDate();
+                }
             }
         }
     }
+
 
     /**
      * Searches for an invoice by Date
