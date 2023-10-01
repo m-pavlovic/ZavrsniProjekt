@@ -1,24 +1,23 @@
 ------------------------------------------------------------
 OFFER: INVOICE
 
-Date: Sun Oct 01 07:40:35 CEST 2023
+Date: Fri Sep 29 16:48:57 CEST 2023
 
 Services:
 
 WASHING
-WELDING
+PAINTING
 
-Starting date: 12/12/2023
-Ending date: 12/01/2024
+Starting date: DD/MM/YYYY
+Ending date: DD/MM/YYYY
 
-Price: 400 EUR
+Price: 550 EUR
 ------------------------------------------------------------
-Customer: Kristina
-Separovic
+Customer: sdasf
+sdad
 Card
-Sirotinja
-Koća
-25
-
+dsada
+Jedrilica
+36
 
 Invoice ID: 1

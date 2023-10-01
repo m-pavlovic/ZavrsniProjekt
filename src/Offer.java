@@ -78,6 +78,7 @@ public class Offer extends JFrame {
         endingDateTextField.setFont(new Font("MV Boli", Font.BOLD, 18));
         calculateButton.setBounds(500, 500, 200, 100);
         calculateButton.setFont(new Font("MV Boli", Font.BOLD, 18));
+        calculateButton.setFocusable(false);
         startingDateTextField.setText("DD/MM/YYYY");
         startingDateTextField.setDisabledTextColor(Color.GRAY);
         startingDateTextField.setEnabled(false);
