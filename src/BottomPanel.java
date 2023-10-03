@@ -86,7 +86,7 @@ public class BottomPanel extends JPanel {
         shipLengthSlider.setPaintTrack(true);
         shipLengthSlider.setPaintLabels(true);
         sliderLabel.setBounds(410, 230, 120, 20);
-        sliderLabel.setFont(new Font("Serif", Font.BOLD, 15));
+        sliderLabel.setFont(new Font("Century Schoolbook", Font.BOLD, 15));
         shipLengthSlider.addChangeListener(e -> sliderLabel.setText("Length: " + shipLengthSlider.getValue()));
         icon.setImage(icon.getImage().getScaledInstance(70, 70, Image.SCALE_DEFAULT));
         iconLabel.setIcon(icon);
