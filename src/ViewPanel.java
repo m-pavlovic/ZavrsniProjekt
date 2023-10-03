@@ -16,7 +16,7 @@ public class ViewPanel extends JPanel {
 
     private void initPanelComps() {
         textArea = new JTextArea();
-        textArea.setPreferredSize(new Dimension(800, 300));
+        textArea.setPreferredSize(new Dimension(790, 300));
         textArea.setEditable(false);
         textArea.setFont(new Font("Century Schoolbook", Font.PLAIN, 20));
         scrollPane = new JScrollPane(textArea);
@@ -26,7 +26,7 @@ public class ViewPanel extends JPanel {
 
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        scrollPane.setPreferredSize(new Dimension(800, 280));
+        scrollPane.setPreferredSize(new Dimension(780, 280));
         add(scrollPane);
     }
 
