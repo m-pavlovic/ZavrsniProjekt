@@ -23,8 +23,6 @@ public class Offer extends JFrame {
     private OfferListener offerListener;
     private static String invoiceText;
     Date date = new Date();
-    Date startingDate;
-    Date endingDate;
     static SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 
 

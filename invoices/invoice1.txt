@@ -1,0 +1,28 @@
+------------------------------------------------------------
+OFFER: INVOICE
+
+Date: 03/10/2023
+
+Services:
+
+WASHING
+WELDING
+PAINTING
+SAND BLASTING
+OVERHAULING AND REPAIR OF STABLE ENGINES
+REPAIR OF ELECTRICAL EQUIPMENT
+
+Starting date: 11/11/2023
+Ending date: 15/02/2024
+
+Price: 8850 EUR
+------------------------------------------------------------
+Customer: Marija
+Nikolic
+Cash
+ImaSeMozeSe
+Jahta
+65
+
+
+Invoice ID: 1
