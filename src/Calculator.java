@@ -48,7 +48,7 @@ public class Calculator extends JFrame implements ActionListener {
     private void layoutFrame() {
         invoiceTextArea.setPreferredSize(new Dimension(400, 700));
         invoiceTextArea.setEditable(false);
-        invoiceTextArea.setFont(new Font("Calibri", Font.PLAIN, 20));
+        invoiceTextArea.setFont(new Font("Century Schoolbook", Font.PLAIN, 20));
         invoiceTextArea.setText(Offer.getInvoiceText());
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
@@ -57,7 +57,7 @@ public class Calculator extends JFrame implements ActionListener {
         priceTextArea.setPreferredSize(new Dimension(400, 650));
         priceTextArea.setEditable(false);
         priceTextArea.setBounds(400, 0, 380, 300);
-        priceTextArea.setFont(new Font("Calibri", Font.BOLD, 20));
+        priceTextArea.setFont(new Font("Century Schoolbook", Font.BOLD, 20));
         priceTextArea.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
         priceTextArea.setText("---------------------------------------------\n" +
                 "---------------------------------------------\n" + "\nPRICE: " + Offer.getPrice() + " €\n"

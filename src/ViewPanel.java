@@ -18,6 +18,7 @@ public class ViewPanel extends JPanel {
         textArea = new JTextArea();
         textArea.setPreferredSize(new Dimension(800, 300));
         textArea.setEditable(false);
+        textArea.setFont(new Font("Century Schoolbook", Font.PLAIN, 20));
         scrollPane = new JScrollPane(textArea);
     }
 

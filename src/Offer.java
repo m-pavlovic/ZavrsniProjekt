@@ -61,7 +61,7 @@ public class Offer extends JFrame {
 
     private void layoutFrame() {
         offerLabel.setBounds(340, 20, 200, 50);
-        offerLabel.setFont(new Font("MV Boli", Font.BOLD, 40));
+        offerLabel.setFont(new Font("Century Schoolbook", Font.BOLD, 40));
         washing.setBounds(70, 250, 200, 50);
         welding.setBounds(70, 300, 200, 50);
         painting.setBounds(70, 350, 200, 50);
@@ -70,17 +70,17 @@ public class Offer extends JFrame {
         repairOfElectricalEquipment.setBounds(70, 500, 400, 50);
         checkBoxLabel.setText("Choose the services you want to use:");
         checkBoxLabel.setBounds(70, 150, 320, 50);
-        checkBoxLabel.setFont(new Font("MV Boli", Font.BOLD, 14));
+        checkBoxLabel.setFont(new Font("Century Schoolbook", Font.BOLD, 14));
         startingDateLabel.setBounds(500, 150, 200, 50);
-        startingDateLabel.setFont(new Font("MV Boli", Font.BOLD, 14));
+        startingDateLabel.setFont(new Font("Century Schoolbook", Font.BOLD, 14));
         startingDateTextField.setBounds(500, 200, 200, 50);
         endingDateLabel.setBounds(500, 250, 200, 50);
-        endingDateLabel.setFont(new Font("MV Boli", Font.BOLD, 14));
+        endingDateLabel.setFont(new Font("Century Schoolbook", Font.BOLD, 14));
         endingDateTextField.setBounds(500, 300, 200, 50);
-        startingDateTextField.setFont(new Font("MV Boli", Font.BOLD, 18));
-        endingDateTextField.setFont(new Font("MV Boli", Font.BOLD, 18));
+        startingDateTextField.setFont(new Font("Century Schoolbook", Font.BOLD, 18));
+        endingDateTextField.setFont(new Font("Century Schoolbook", Font.BOLD, 18));
         calculateButton.setBounds(500, 500, 200, 100);
-        calculateButton.setFont(new Font("MV Boli", Font.BOLD, 18));
+        calculateButton.setFont(new Font("Century Schoolbook", Font.BOLD, 18));
         startingDateTextField.setText("DD/MM/YYYY");
         startingDateTextField.setDisabledTextColor(Color.GRAY);
         startingDateTextField.setEnabled(false);
