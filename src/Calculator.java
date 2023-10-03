@@ -139,14 +139,35 @@ public class Calculator extends JFrame implements ActionListener {
         String[] options = {"Search by ID", "Search by Name"};
         int searchChoice = JOptionPane.showOptionDialog(null, "Search by ID or Name?", "Search",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
-        if (searchChoice == 0) {
-            searchID = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter ID: "));
-            searchByID(searchID);
-        } else if (searchChoice == 1) {
-            searchName = JOptionPane.showInputDialog(null, "Enter Name: ");
-            searchByName(searchName);
+
+        if (searchChoice == JOptionPane.CLOSED_OPTION) {
+            JOptionPane.showMessageDialog(null, "Search cancelled!");
+            return;
+        }
+
+        try {
+            if (searchChoice == 0) {
+                String input = JOptionPane.showInputDialog(null, "Enter ID:");
+                if (input == null) {
+                    JOptionPane.showMessageDialog(null, "Search cancelled!", "Message", JOptionPane.INFORMATION_MESSAGE);
+                    return;
+                }
+                searchID = Integer.parseInt(input);
+                searchByID(searchID);
+            } else if (searchChoice == 1) {
+                searchName = JOptionPane.showInputDialog(null, "Enter Name:");
+                if (searchName == null) {
+                    JOptionPane.showMessageDialog(null, "Search cancelled!", "Message", JOptionPane.INFORMATION_MESSAGE);
+                    return;
+                }
+                searchByName(searchName);
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Invalid ID!", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
+
+
 
     /**
      * Searches for an invoice by ID

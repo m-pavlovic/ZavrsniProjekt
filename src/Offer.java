@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Offer extends JFrame {
@@ -21,6 +22,8 @@ public class Offer extends JFrame {
     JButton calculateButton;
     private OfferListener offerListener;
     private static String invoiceText;
+    Date date = new Date();
+    static SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 
 
     Offer() {
@@ -154,9 +157,11 @@ public class Offer extends JFrame {
                             isPaintingChecked, isSandBlastingChecked, isOverhaulingAndRepairOfStableEnginesChecked,
                             isRepairOfElectricalEquipmentChecked, startingDate, endingDate);
                     offerListener.offerEventOccurred(oe);
-                    calculate();
-                    new Calculator();
-                    dispose();
+                    if (checkDate(startingDate) && checkDate(endingDate)) {
+                        calculate();
+                        new Calculator();
+                        dispose();
+                    }
                 }
             });
         }
@@ -170,8 +175,7 @@ public class Offer extends JFrame {
 calculate() method is used to calculate the price of the services that the user has chosen.
  */
     public void calculate() {
-        Date date = new Date();
-        String invoice = "INVOICE\n\n" + "Date: " + date.toString() + "\n\n" + "Services:\n\n";
+        String invoice = "INVOICE\n\n" + "Date: " + formatter.format(date) + "\n\n" + "Services:\n\n";
         if (washing.getState()) {
             invoice += "WASHING\n";
         }
@@ -212,24 +216,35 @@ calculate() method is used to calculate the price of the services that the user 
     private static String calculatePrice() {
         int price = 0;
         if (washing.getState()) {
-            price += 200;
-        }
-        if (welding.getState()) {
-            price += 200;
-        }
-        if (painting.getState()) {
-            price += 350;
-        }
-        if (sandBlasting.getState()) {
-            price += 500;
-        }
-        if (overhaulingAndRepairOfStableEngines.getState()) {
             price += 1000;
         }
+        if (welding.getState()) {
+            price += 1400;
+        }
+        if (painting.getState()) {
+            price += 1350;
+        }
+        if (sandBlasting.getState()) {
+            price += 1500;
+        }
+        if (overhaulingAndRepairOfStableEngines.getState()) {
+            price += 2000;
+        }
         if (repairOfElectricalEquipment.getState()) {
-            price += 600;
+            price += 1600;
         }
         return String.valueOf(price);
+    }
+
+    public static boolean checkDate(String searchDate) {
+        try {
+            formatter.setLenient(false);
+            formatter.parse(searchDate);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Invalid date!");
+            return false;
+        }
+        return true;
     }
 }
 

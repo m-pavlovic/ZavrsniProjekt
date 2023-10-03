@@ -1,24 +1,28 @@
 ------------------------------------------------------------
 OFFER: INVOICE
 
-Date: Sun Oct 01 07:40:35 CEST 2023
+Date: 03/10/2023
 
 Services:
 
 WASHING
 WELDING
+PAINTING
+SAND BLASTING
+OVERHAULING AND REPAIR OF STABLE ENGINES
+REPAIR OF ELECTRICAL EQUIPMENT
 
-Starting date: 12/12/2023
-Ending date: 12/01/2024
+Starting date: 11/11/2023
+Ending date: 15/02/2024
 
-Price: 400 EUR
+Price: 8850 EUR
 ------------------------------------------------------------
-Customer: Kristina
-Separovic
-Card
-Sirotinja
-Koća
-25
+Customer: Marija
+Nikolic
+Cash
+ImaSeMozeSe
+Jahta
+65
 
 
 Invoice ID: 1
