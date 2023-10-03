@@ -156,18 +156,28 @@ public class Calculator extends JFrame implements ActionListener {
                     }
                 } catch (NumberFormatException e) {
                     JOptionPane.showMessageDialog(null, "Enter a valid ID!", "Error", JOptionPane.ERROR_MESSAGE);
+                } catch (NullPointerException e) {
+                    JOptionPane.showMessageDialog(null, "Search canceled!", "Message", JOptionPane.INFORMATION_MESSAGE);
                 }
             } else if (searchChoice == 1) {
                 searchName = JOptionPane.showInputDialog(null, "Enter Name: ");
-                if (!Objects.equals(searchName, "")) {
-                    searchByName(searchName);
-                } else {
-                    JOptionPane.showMessageDialog(null, "Enter a name!", "Error", JOptionPane.ERROR_MESSAGE);
+                try {
+                    if (!Objects.equals(searchName, "")) {
+                        searchByName(searchName);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Enter a name!", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                } catch (NullPointerException e) {
+                    JOptionPane.showMessageDialog(null, "Search canceled!", "Message", JOptionPane.INFORMATION_MESSAGE);
                 }
             } else if (searchChoice == 2) {
                 searchDate = JOptionPane.showInputDialog(null, "Enter Date in format dd/MM/yyyy: ");
-                if (Offer.checkDate(searchDate)) {
-                    searchByDate();
+                try {
+                    if (Offer.checkDate(searchDate)) {
+                        searchByDate();
+                    }
+                } catch (NullPointerException e) {
+                    JOptionPane.showMessageDialog(null, "Search canceled!", "Message", JOptionPane.INFORMATION_MESSAGE);
                 }
             }
         }

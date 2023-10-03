@@ -7,19 +7,18 @@ Services:
 
 WASHING
 WELDING
-PAINTING
 
-Starting date: 11/12/2023
-Ending date: 15/06/2024
+Starting date: 02/12/2023
+Ending date: 01/02/2024
 
-Price: 750 EUR
+Price: 400 EUR
 ------------------------------------------------------------
-Customer: Faust
-Fausting
-Cash
-Shit
-Katamaran
-41
+Customer: Kristina
+Separovic
+Card
+Sirotinja
+Koća
+25
 
 
-Invoice ID: 1
+Invoice ID: 3
