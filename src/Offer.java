@@ -215,6 +215,7 @@ calculate() method is used to calculate the price of the services that the user 
      */
     private static String calculatePrice() {
         int price = 0;
+        int dayprice = 50;
         if (washing.getState()) {
             price += 1000;
         }
@@ -232,6 +233,28 @@ calculate() method is used to calculate the price of the services that the user 
         }
         if (repairOfElectricalEquipment.getState()) {
             price += 1600;
+        }
+        if (checkDate(OfferEvent.getStartDate()) && checkDate(OfferEvent.getEndDate())) {
+            String[] startingDate = OfferEvent.getStartDate().split("/");
+            String[] endingDate = OfferEvent.getEndDate().split("/");
+            int startingDay = Integer.parseInt(startingDate[0]);
+            int startingMonth = Integer.parseInt(startingDate[1]);
+            int startingYear = Integer.parseInt(startingDate[2]);
+            int endingDay = Integer.parseInt(endingDate[0]);
+            int endingMonth = Integer.parseInt(endingDate[1]);
+            int endingYear = Integer.parseInt(endingDate[2]);
+            int days = 0;
+            if (startingYear == endingYear) {
+                if (startingMonth == endingMonth) {
+                    days = endingDay - startingDay;
+                } else {
+                    days = (endingMonth - startingMonth) * 30 + endingDay - startingDay;
+                }
+            } else {
+                days = (endingYear - startingYear) * 365 + (endingMonth - startingMonth) * 30 + endingDay - startingDay;
+            }
+            dayprice *= days;
+            price += dayprice;
         }
         return String.valueOf(price);
     }

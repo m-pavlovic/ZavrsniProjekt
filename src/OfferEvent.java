@@ -15,8 +15,8 @@ public class OfferEvent extends EventObject {
     private boolean engineRepairIsChecked;
     private boolean sandBlastingIsChecked;
     private boolean electricalRepairIsChecked;
-    private String startDate;
-    private String endDate;
+    private static String startDate;
+    private static String endDate;
     public OfferEvent(Object source, boolean washingIsChecked, boolean paintingIsChecked, boolean weldingIsChecked,
                       boolean engineRepairIsChecked, boolean sandBlastingIsChecked, boolean electricalRepairIsChecked, String startDate, String endDate) {
         super(source);
@@ -55,11 +55,11 @@ public class OfferEvent extends EventObject {
         return electricalRepairIsChecked;
     }
 
-    public String getStartDate() {
+    public static String getStartDate() {
         return startDate;
     }
 
-    public String getEndDate() {
+    public static String getEndDate() {
         return endDate;
     }
 }
