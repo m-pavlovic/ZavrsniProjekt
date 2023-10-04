@@ -136,38 +136,16 @@ public class Calculator extends JFrame implements ActionListener {
      */
     private void saveToOneFile() {
         checkIfFolderExists();
-
-        try {
-            File outputFile = new File("invoices/all_invoices.txt");
-            FileWriter fw = new FileWriter(outputFile);
-            BufferedWriter bw = new BufferedWriter(fw);
-
-            File folder = new File("invoices");
-            File[] listOfFiles = folder.listFiles();
-
-            if (listOfFiles != null) {
-                for (File file : listOfFiles) {
-                    if (file.isFile() && file.getName().startsWith("invoice")) {
-                        bw.write("------------------------------------------------------------\n");
-                        bw.write("Invoice File: " + file.getName() + "\n");
-
-                        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-                            String line;
-                            while ((line = br.readLine()) != null) {
-                                bw.write(line + "\n");
-                            }
-                        }
-
-                        bw.write("\n");
-                    }
-                }
+        try (FileWriter fw = new FileWriter("invoices/invoice.txt", true);
+             BufferedWriter bw = new BufferedWriter(fw);
+             PrintWriter out = new PrintWriter(bw)) {
+            for (Map.Entry<String, String> entry : invoiceMap.entrySet()) {
+                out.println(entry.getKey() + ": " + entry.getValue());
             }
-
-            bw.close();
-            JOptionPane.showMessageDialog(null, "All invoices saved to one file!");
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            JOptionPane.showMessageDialog(null, "Could not save file!", "Error", JOptionPane.ERROR_MESSAGE);
         }
+
     }
 
 
