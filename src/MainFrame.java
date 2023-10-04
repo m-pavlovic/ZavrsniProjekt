@@ -48,7 +48,9 @@ public class MainFrame extends JFrame {
      * 1. Sets the text on the text area
      * 2. Clears the text area
      * 3. Saves the text from the text area to a file
-     * 4. Enables the clear and save buttons
+     * 4. Loads the text from a file to the text area
+     * 5. Searches for invoices
+     * 6. Resets the form
      */
     private void activateApp() {
         bottomPanel.setBottomPanelListener(new BottomPanelListener() {

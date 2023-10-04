@@ -132,6 +132,46 @@ public class Calculator extends JFrame implements ActionListener {
     }
 
     /**
+     * Saves all invoices to one file
+     */
+    private void saveToOneFile() {
+        checkIfFolderExists();
+
+        try {
+            File outputFile = new File("invoices/all_invoices.txt");
+            FileWriter fw = new FileWriter(outputFile);
+            BufferedWriter bw = new BufferedWriter(fw);
+
+            File folder = new File("invoices");
+            File[] listOfFiles = folder.listFiles();
+
+            if (listOfFiles != null) {
+                for (File file : listOfFiles) {
+                    if (file.isFile() && file.getName().startsWith("invoice")) {
+                        bw.write("------------------------------------------------------------\n");
+                        bw.write("Invoice File: " + file.getName() + "\n");
+
+                        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+                            String line;
+                            while ((line = br.readLine()) != null) {
+                                bw.write(line + "\n");
+                            }
+                        }
+
+                        bw.write("\n");
+                    }
+                }
+            }
+
+            bw.close();
+            JOptionPane.showMessageDialog(null, "All invoices saved to one file!");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+    /**
      * Opens a pane with options to search by ID or Name
      */
 

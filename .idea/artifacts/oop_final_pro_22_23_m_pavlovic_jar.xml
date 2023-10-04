@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="oop_final_pro_22_23-m-pavlovic:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/oop_final_pro_22_23_m_pavlovic_jar</output-path>
+    <root id="archive" name="oop_final_pro_22_23-m-pavlovic.jar">
+      <element id="module-output" name="oop_final_pro_22_23-m-pavlovic" />
+    </root>
+  </artifact>
+</component>

@@ -15,7 +15,7 @@ public class ViewPanel extends JPanel {
     }
 
     private void initPanelComps() {
-        textArea = new JTextArea(12, 43);
+        textArea = new JTextArea(12, 38);
         textArea.setEditable(false);
         textArea.setFont(new Font("Century Schoolbook", Font.PLAIN, 20));
         scrollPane = new JScrollPane(textArea);
