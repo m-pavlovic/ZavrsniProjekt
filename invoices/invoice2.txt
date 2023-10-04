@@ -6,18 +6,19 @@ Date: 04/10/2023
 Services:
 
 WASHING
-PAINTING
+WELDING
 
-Starting date: 10/02/23
-Ending date: 11/11/2024
+Starting date: 10/02/2024
+Ending date: 11/03/2024
 
-Price: 36534150 EUR
+Price: 3950 EUR
 ------------------------------------------------------------
-Customer: Marija
-Pavlovic
+Customer: Kristina
+Separovic
 Card
-Brod
-Gulet
-35
+Sirotinja
+Koća
+25
+
 
 Invoice ID: 2

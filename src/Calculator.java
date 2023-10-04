@@ -98,6 +98,7 @@ public class Calculator extends JFrame implements ActionListener {
         invoiceMap.put("------------------------------------------------------------\nCustomer", ViewPanel.customerInfo());
         invoiceMap.put("------------------------------------------------------------\nOFFER", Offer.getInvoiceText());
         saveToFile();
+        saveToOneFile();
 
     }
 
