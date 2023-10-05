@@ -1,121 +1,28 @@
-------------------------------------------------------------
-OFFER: INVOICE
-
-Date: 04/10/2023
-
-Services:
-
-WASHING
-WELDING
-PAINTING
-SAND BLASTING
-OVERHAULING AND REPAIR OF STABLE ENGINES
-REPAIR OF ELECTRICAL EQUIPMENT
-
-Starting date: 11/11/2023
-Ending date: 12/02/2024
-
-Price: 13650 EUR
-------------------------------------------------------------
-Customer: Marija
-Nikolic
-Cash
-ImaSeMozeSe
-Jahta
-65
-
-
 Invoice ID: 1
-------------------------------------------------------------
-OFFER: INVOICE
-
-Date: 04/10/2023
-
-Services:
-
-WASHING
-WELDING
-
-Starting date: 15/11/2023
-Ending date: 15/12/2023
-
-Price: 3900 EUR
-------------------------------------------------------------
-Customer: Kristina
-Separovic
-Card
-Sirotinja
-Koća
-25
-
-
-Invoice ID: 2
-------------------------------------------------------------
-OFFER: INVOICE
-
-Date: 04/10/2023
-
-Services:
-
-WASHING
-WELDING
-OVERHAULING AND REPAIR OF STABLE ENGINES
-
-Starting date: 10/11/2023
-Ending date: 05/01/2024
-
-Price: 7400 EUR
 ------------------------------------------------------------
 Customer: Marija
 Pavlovic
-Card
-San
+Cash
+OOP
 Gulet
-45
+35
 
-Invoice ID: 3
+
 ------------------------------------------------------------
-OFFER: INVOICE
+OFFER INVOICE
 
-Date: 04/10/2023
+Date: 05/10/2023
 
 Services:
 
 WASHING
-WELDING
-PAINTING
-SAND BLASTING
-OVERHAULING AND REPAIR OF STABLE ENGINES
-REPAIR OF ELECTRICAL EQUIPMENT
 
 Starting date: 11/11/2023
-Ending date: 25/01/2024
+Ending date: 22/11/2023
 
-Price: 12800 EUR
-------------------------------------------------------------
-Customer: Marija
-Nikolic
-Cash
-ImaSeMozeSe
-Jahta
-65
-
-
-Invoice ID: 1
-------------------------------------------------------------
-OFFER: INVOICE
-
-Date: 04/10/2023
-
-Services:
-
-WASHING
-WELDING
-
-Starting date: 10/02/2024
-Ending date: 11/03/2024
-
-Price: 3950 EUR
+Price: 1550 EUR
+****************************************************** 
+Invoice ID: 2
 ------------------------------------------------------------
 Customer: Kristina
 Separovic
@@ -125,28 +32,47 @@ Koća
 25
 
 
-Invoice ID: 2
 ------------------------------------------------------------
-OFFER: INVOICE
+OFFER INVOICE
 
-Date: 04/10/2023
+Date: 05/10/2023
 
 Services:
 
 WASHING
 WELDING
-OVERHAULING AND REPAIR OF STABLE ENGINES
 
 Starting date: 11/12/2023
-Ending date: 05/01/2024
+Ending date: 21/12/2023
 
-Price: 5850 EUR
+Price: 2900 EUR
+****************************************************** 
+Invoice ID: 3
 ------------------------------------------------------------
 Customer: Marija
-Pavlovic
-Card
-Ajme
-Gulet
-45
+Nikolic
+Cash
+ImaSeMozeSe
+Jahta
+65
 
-Invoice ID: 3
+
+------------------------------------------------------------
+OFFER INVOICE
+
+Date: 05/10/2023
+
+Services:
+
+WASHING
+WELDING
+PAINTING
+SAND BLASTING
+OVERHAULING AND REPAIR OF STABLE ENGINES
+REPAIR OF ELECTRICAL EQUIPMENT
+
+Starting date: 15/12/2023
+Ending date: 15/01/2024
+
+Price: 10600 EUR
+****************************************************** 
